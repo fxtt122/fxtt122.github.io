@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>活动</title>
+    <style>
+        /* 基础重置和变量 */
+        :root {
+            --primary-color: #3498db;
+            --secondary-color: #2c3e50;
+            --accent-color: #e74c3c;
+            --light-color: #ecf0f1;
+            --dark-color: #2c3e50;
+            --text-color: #333;
+            --text-light: #7f8c8d;
+            --shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            --border-radius: 8px;
+            --transition: all 0.3s ease;
+            --max-content-width: 1200px;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        html {
+            scroll-behavior: smooth;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            line-height: 1.7;
+            color: var(--text-color);
+            background-color: #f9f9f9;
+            overflow-x: hidden;
+        }
+        
+        /* 容器系统 */
+        .container {
+            width: 100%;
+            padding: 0 5vw;
+            margin: 0 auto;
+        }
+        
+        /* 移动设备优先的布局 */
+        .header {
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            color: white;
+            padding: 1.5rem 0;
+            box-shadow: var(--shadow);
+        }
+        
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 700;
+            text-align: center;
+        }
+        
+        .content-section {
+            padding: 2rem 0;
+        }
+        
+        h1 {
+            text-align: center;
+            margin-bottom: 1.5rem;
+            color: var(--secondary-color);
+        }
+        
+        h2 {
+            margin: 1.5rem 0 1rem;
+            color: var(--secondary-color);
+            border-bottom: 2px solid var(--primary-color);
+            padding-bottom: 0.5rem;
+        }
+        
+        h3 {
+            margin: 1.2rem 0 0.8rem;
+            color: var(--secondary-color);
+        }
+        
+        ul {
+            padding-left: 1.5rem;
+            margin-bottom: 1.5rem;
+        }
+        
+        li {
+            margin-bottom: 0.5rem;
+        }
+        
+        a {
+            color: var(--primary-color);
+            text-decoration: none;
+            transition: var(--transition);
+        }
+        
+        a:hover {
+            color: var(--accent-color);
+            text-decoration: underline;
+        }
+        
+        .project-list {
+            list-style-type: none;
+            padding-left: 0;
+        }
+        
+        .project-list li {
+            margin-bottom: 1rem;
+            padding: 1rem;
+            background: white;
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+        }
+        
+        .project-list li:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+        }
+        
+        .project-list a {
+            font-size: 1.2rem;
+            font-weight: 600;
+            display: block;
+        }
+        
+        pre {
+            background: white;
+            padding: 1.5rem;
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow);
+            overflow-x: auto;
+            white-space: pre-wrap;
+            word-wrap: break-word;
+            margin-bottom: 1.5rem;
+            line-height: 1.5;
+            font-family: inherit;
+        }
+        
+        .contact-info {
+            background: white;
+            padding: 1.5rem;
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow);
+            margin-bottom: 1.5rem;
+        }
+        
+        .footer {
+            background-color: var(--secondary-color);
+            color: white;
+            padding: 2rem 0;
+            text-align: center;
+            margin-top: 2rem;
+        }
+        
+        .footer p {
+            margin-top: 1rem;
+            color: var(--light-color);
+        }
+        
+        /* 平板设备优化 */
+        @media (min-width: 768px) {
+            .container {
+                max-width: 720px;
+            }
+            
+            .project-list {
+                display: grid;
+                grid-template-columns: repeat(2, 1fr);
+                gap: 1.5rem;
+            }
+        }
+        
+        /* 桌面设备优化 */
+        @media (min-width: 992px) {
+            .container {
+                max-width: 960px;
+            }
+            
+            .project-list {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+        
+        /* 大屏幕优化 */
+        @media (min-width: 1200px) {
+            .container {
+                max-width: var(--max-content-width);
+            }
+        }
+        
+        /* 深色模式支持 */
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --text-color: #e0e0e0;
+                --light-color: #1a1a1a;
+                --shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+            }
+            
+            body {
+                background-color: #121212;
+            }
+            
+            .project-list li, pre, .contact-info {
+                background-color: #2d2d2d;
+            }
+        }
+        
+        /* 减少动画偏好 */
+        @media (prefers-reduced-motion: reduce) {
+            * {
+                transition-duration: 0.01ms !important;
+            }
+            
+            html {
+                scroll-behavior: auto;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <div class="container">
+            <div class="logo">活动</div>
+        </div>
+    </header>
+
+    <main class="container">
+        <section class="content-section">
+        </section>
+    </main>
+<body>
+    <h3><a href="index.html">返回</a></h3>
+    <h1>活动</h1>
+    <h2>当前活动</h2>
+    <p>暂无</p>
+    <h2>往期活动</h2>
+    <h3>2024年5月1日~2024年5月31日</h3>
+    <p>无名剧场搞五一活动啦！5月1日至5月31日无名剧场前十名可免费获取iOS付费软件（任何价格）！应用数量有限，先到先得！</p>
+
+</body>
+    <footer class="footer">
+        <div class="container">
+            <p>无名剧场网页服务系统 - 试运行</p>
+            <p>© 2025 追光系列. 保留所有权利.</p>
+        </div>
+    </footer>
+</body>
+</html>

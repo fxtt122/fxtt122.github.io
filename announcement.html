@@ -1,0 +1,454 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>无名剧场网页服务系统-腾讯会议专用公告</title>
+    <style>
+        /* 基础重置和变量 */
+        :root {
+            --primary-color: #3498db;
+            --secondary-color: #2c3e50;
+            --accent-color: #e74c3c;
+            --light-color: #ecf0f1;
+            --dark-color: #2c3e50;
+            --text-color: #333;
+            --text-light: #7f8c8d;
+            --shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            --border-radius: 8px;
+            --transition: all 0.3s ease;
+            --max-content-width: 1200px;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            line-height: 1.7;
+            color: var(--text-color);
+            background-color: #f9f9f9;
+            overflow-x: hidden;
+        }
+
+        /* 容器系统 */
+        .container {
+            width: 100%;
+            padding: 0 5vw;
+            margin: 0 auto;
+        }
+
+        /* 移动设备优先的布局 */
+        .header {
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            color: white;
+            padding: 1.5rem 0;
+            box-shadow: var(--shadow);
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 700;
+            text-align: center;
+        }
+
+        .content-section {
+            padding: 2rem 0;
+        }
+
+        h1 {
+            text-align: center;
+            margin-bottom: 1.5rem;
+            color: var(--secondary-color);
+        }
+
+        h2 {
+            margin: 1.5rem 0 1rem;
+            color: var(--secondary-color);
+            border-bottom: 2px solid var(--primary-color);
+            padding-bottom: 0.5rem;
+        }
+
+        h3 {
+            margin: 1.2rem 0 0.8rem;
+            color: var(--secondary-color);
+        }
+
+        ul {
+            padding-left: 1.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        li {
+            margin-bottom: 0.5rem;
+        }
+
+        a {
+            color: var(--primary-color);
+            text-decoration: none;
+            transition: var(--transition);
+        }
+
+        a:hover {
+            color: var(--accent-color);
+            text-decoration: underline;
+        }
+
+        .project-list {
+            list-style-type: none;
+            padding-left: 0;
+        }
+
+        .project-list li {
+            margin-bottom: 1rem;
+            padding: 1rem;
+            background: white;
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+        }
+
+        .project-list li:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+        }
+
+        .project-list a {
+            font-size: 1.2rem;
+            font-weight: 600;
+            display: block;
+        }
+
+        pre {
+            background: white;
+            padding: 1.5rem;
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow);
+            overflow-x: auto;
+            white-space: pre-wrap;
+            word-wrap: break-word;
+            margin-bottom: 1.5rem;
+            line-height: 1.5;
+            font-family: inherit;
+        }
+
+        .contact-info {
+            background: white;
+            padding: 1.5rem;
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow);
+            margin-bottom: 1.5rem;
+        }
+
+        .footer {
+            background-color: var(--secondary-color);
+            color: white;
+            padding: 2rem 0;
+            text-align: center;
+            margin-top: 2rem;
+        }
+
+        .footer p {
+            margin-top: 1rem;
+            color: var(--light-color);
+        }
+        
+        /* 活动卡片样式 */
+        .activity-card {
+            background: white;
+            padding: 1.5rem;
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow);
+            margin-bottom: 1.5rem;
+            transition: var(--transition);
+        }
+        
+        .activity-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+        }
+        
+        .activity-card h3 {
+            color: var(--primary-color);
+            border-bottom: 1px solid #eee;
+            padding-bottom: 0.5rem;
+        }
+        
+        .activity-card p {
+            margin-top: 0.8rem;
+            line-height: 1.6;
+        }
+        
+        .back-link {
+            display: inline-block;
+            margin-bottom: 1.5rem;
+            padding: 0.5rem 1rem;
+            background: var(--primary-color);
+            color: white;
+            border-radius: var(--border-radius);
+            text-decoration: none;
+            transition: var(--transition);
+        }
+        
+        .back-link:hover {
+            background: var(--accent-color);
+            text-decoration: none;
+            color: white;
+        }
+        
+        /* 公告内容样式 */
+        .announcement-content {
+            background: white;
+            padding: 1.5rem;
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow);
+            line-height: 1.6;
+            margin-bottom: 1.5rem;
+        }
+        
+        .announcement-content a {
+            color: var(--accent-color);
+            font-weight: 600;
+        }
+        
+        .announcement-section {
+            margin-bottom: 2rem;
+        }
+        
+        .announcement-section h3 {
+            color: var(--primary-color);
+            border-bottom: 1px solid #eee;
+            padding-bottom: 0.5rem;
+            margin-bottom: 1rem;
+        }
+        
+        /* 活动链接样式 - 添加上下分割线 */
+        .activity-link-section {
+            padding: 1.5rem 0;
+            margin: 1.5rem 0;
+            border-top: 1px solid #eee;
+            border-bottom: 1px solid #eee;
+            text-align: center;
+        }
+        
+        .activity-link {
+            display: inline-block;
+            padding: 0.8rem 1.5rem;
+            background: var(--primary-color);
+            color: white;
+            border-radius: var(--border-radius);
+            text-decoration: none;
+            font-weight: 600;
+            transition: var(--transition);
+        }
+        
+        .activity-link:hover {
+            background: var(--accent-color);
+            text-decoration: none;
+            color: white;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        
+        /* 段落间距 */
+        .announcement-section p {
+            margin-bottom: 1rem;
+        }
+        
+        /* 列表间距 */
+        .announcement-section ul,
+        .announcement-section ol {
+            margin-bottom: 1.5rem;
+        }
+
+        /* 平板设备优化 */
+        @media (min-width: 768px) {
+            .container {
+                max-width: 720px;
+            }
+
+            .project-list {
+                display: grid;
+                grid-template-columns: repeat(2, 1fr);
+                gap: 1.5rem;
+            }
+            
+            .activity-grid {
+                display: grid;
+                grid-template-columns: repeat(2, 1fr);
+                gap: 1.5rem;
+            }
+        }
+
+        /* 桌面设备优化 */
+        @media (min-width: 992px) {
+            .container {
+                max-width: 960px;
+            }
+
+            .project-list {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        /* 大屏幕优化 */
+        @media (min-width: 1200px) {
+            .container {
+                max-width: var(--max-content-width);
+            }
+        }
+
+        /* 深色模式支持 */
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --text-color: #e0e0e0;
+                --light-color: #1a1a1a;
+                --shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+            }
+
+            body {
+                background-color: #121212;
+            }
+
+            .project-list li, pre, .contact-info, .activity-card, .announcement-content {
+                background-color: #2d2d2d;
+            }
+            
+            .activity-card h3, .announcement-section h3 {
+                border-bottom-color: #444;
+            }
+            
+            .activity-link-section {
+                border-top-color: #444;
+                border-bottom-color: #444;
+            }
+        }
+
+        /* 减少动画偏好 */
+        @media (prefers-reduced-motion: reduce) {
+            * {
+                transition-duration: 0.01ms !important;
+            }
+
+            html {
+                scroll-behavior: auto;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <div class="container">
+            <div class="logo">腾讯会议专用公告</div>
+        </div>
+    </header>
+
+    <main class="container">
+        <section class="content-section">
+            <a href="index.html" class="back-link">← 返回首页</a>
+            
+            <div class="announcement-content">
+                <h2>腾讯会议专用公告</h2>
+                
+                <div class="announcement-section">
+                    <h3>重要通知</h3>
+                    <p>2025年9月11日晚上重大事件：收到阳谋提醒，网易我的世界将关闭 vivo、华为、百度 渠道服务器，阳谋因此退游玩了6年的我的世界……</p>
+                    <p>阳谋账号最后永别，最后的信息：</p>
+                    <ul>
+                        <li>昵称：</li>
+                        <li>等级：46/50（基岩Ⅱ）</li>
+                        <li>钻石：具体数目未知，但已过千，全部放弃</li>
+                        <li>组件（包括付费及绝版）：全部放弃</li>
+                    </ul>
+                    <p>总之……在10月*日后全部永别……</p>
+                    
+                    <p>在收到通知之后，科帝筹备大量资源以尝试保留游戏数据，最终成功保留 <strong>刚来的fxtt8号</strong>（vivo渠道）全部数据，并在2025年9月11日22时40分宣告 <strong>刚来的fxtt5号</strong>（vivo渠道）与 <strong>刚来的fxtt6号</strong>（vivo渠道）与我们永别，这将成为历史的一刻。且 <strong>刚来的fxtt</strong>（华为渠道）数据转移成功！</p>
+                    
+                    <p>无奖竞猜：大家猜猜 <strong>刚来的fxtt7号</strong>（九游渠道）能留下来吗？</p>
+                </div>
+                
+                <div class="announcement-section">
+                    <h3>团队动态</h3>
+                    <p>由于 <strong>Minecraft-网易-1号小队</strong> 主机缺席，所以该小队已于2025年9月12日解散！</p>
+                    
+                    <p>2024年4月12日狗墨给予303作弊版泰拉瑞亚，现在已经刑满放行！</p>
+                </div>
+                
+                <div class="announcement-section">
+                    <h3>会议状态</h3>
+                    <p>主持人未挂机，主持人在线，可语音聊天。</p>
+                    
+                    <p>等待玩家进入会议……</p>
+                    
+                    <p>如有紧急事情（如无法使用腾讯会议只能使用一小段时间等）可在"聊天"功能里留言，主持人会定时进入会议查看！主持人回答的问题可在"公告"下方的"回复信息"中看到回复的内容哦！</p>
+                    
+                    <p>一旦进入会议，在离会时一定要告知会议内成员，直到有人听到并回应，如会议内无人或在挂机，请在聊天中告知我们！否则别怪主持人不客气！</p>
+                </div>
+                
+                <div class="announcement-section">
+                    <h3>文件分享</h3>
+                    <p>科帝的分享文件：</p>
+                    
+                    <p>文件链接：<a href="https://www.alipan.com/s/AH6syytNQCv">https://www.alipan.com/s/AH6syytNQCv</a></p>
+                    
+                    <p>提取码: （请从主持人那里获取）</p>
+                    
+                    <p>点击链接浏览器在线 查看/保存 文件；或者复制本段内容，打开「阿里云盘」APP ，无需下载极速在线查看，视频原画倍速播放。</p>
+                    
+                    <p>注：链接有时会变，请留意公告！</p>
+                </div>
+                
+                <div class="announcement-section">
+                    <h3>技术通知</h3>
+                    <p>2025年6月6日讯息，场主的iPad版Java我的世界暂时已无法使用，因为最近P12证书紧缺！</p>
+                </div>
+                
+                <div class="announcement-section">
+                    <h3>特别任务</h3>
+                    <p>无名剧场动员所有人寻找一名叫做"坐望道"的腾讯会议用户，他(她)多次进入会议，抓获者有一定的排名提升！（不是真抓，就是让他主动联系主持人并说出原因就放人走）</p>
+                    
+                    <p>联系方式（序号代表优先度）：</p>
+                    <ol>
+                        <li>电话拨打：15712376811</li>
+                        <li>腾信会议(会议号)：3214159647</li>
+                        <li>微信联系(微信号)：fxtt122</li>
+                        <li>QQ联系(QQ号)：2076976616</li>
+                        <li>电子邮箱：2076976616@qq.com</li>
+                    </ol>
+                </div>
+                
+                <div class="announcement-section">
+                    <h3>会议背景音乐</h3>
+                    <p>播放状态：未播放</p>
+                    
+                    <p>曲目：Shed a light</p>
+                </div>
+                
+                <!-- 添加了上下分割线的活动链接 -->
+                <div class="activity-link-section">
+                    <a href="activity.html" class="activity-link">点击查看活动</a>
+                </div>
+                
+                <div class="announcement-section">
+                    <h3>回复信息</h3>
+                    <p>暂无</p>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="footer">
+        <div class="container">
+            <p>无名剧场网页服务系统 - 试运行</p>
+            <p>© 2025 追光系列. 保留所有权利.</p>
+        </div>
+    </footer>
+</body>
+</html>

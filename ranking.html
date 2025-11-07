@@ -1,0 +1,449 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>主场排名</title>
+    <style>
+        /* 基础重置和变量 */
+        :root {
+            --primary-color: #3498db;
+            --secondary-color: #2c3e50;
+            --accent-color: #e74c3c;
+            --light-color: #ecf0f1;
+            --dark-color: #2c3e50;
+            --text-color: #333;
+            --text-light: #7f8c8d;
+            --shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            --border-radius: 8px;
+            --transition: all 0.3s ease;
+            --max-content-width: 1200px;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            line-height: 1.7;
+            color: var(--text-color);
+            background-color: #f9f9f9;
+            overflow-x: hidden;
+        }
+
+        /* 容器系统 */
+        .container {
+            width: 100%;
+            padding: 0 5vw;
+            margin: 0 auto;
+        }
+
+        /* 移动设备优先的布局 */
+        .header {
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            color: white;
+            padding: 1.5rem 0;
+            box-shadow: var(--shadow);
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 700;
+            text-align: center;
+        }
+
+        .content-section {
+            padding: 2rem 0;
+        }
+
+        h1 {
+            text-align: center;
+            margin-bottom: 1.5rem;
+            color: var(--secondary-color);
+        }
+
+        h2 {
+            margin: 1.5rem 0 1rem;
+            color: var(--secondary-color);
+            border-bottom: 2px solid var(--primary-color);
+            padding-bottom: 0.5rem;
+        }
+
+        h3 {
+            margin: 1.2rem 0 0.8rem;
+            color: var(--secondary-color);
+        }
+
+        ul {
+            padding-left: 1.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        li {
+            margin-bottom: 0.5rem;
+        }
+
+        a {
+            color: var(--primary-color);
+            text-decoration: none;
+            transition: var(--transition);
+        }
+
+        a:hover {
+            color: var(--accent-color);
+            text-decoration: underline;
+        }
+
+        .project-list {
+            list-style-type: none;
+            padding-left: 0;
+        }
+
+        .project-list li {
+            margin-bottom: 1rem;
+            padding: 1rem;
+            background: white;
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+        }
+
+        .project-list li:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+        }
+
+        .project-list a {
+            font-size: 1.2rem;
+            font-weight: 600;
+            display: block;
+        }
+
+        pre {
+            background: white;
+            padding: 1.5rem;
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow);
+            overflow-x: auto;
+            white-space: pre-wrap;
+            word-wrap: break-word;
+            margin-bottom: 1.5rem;
+            line-height: 1.5;
+            font-family: inherit;
+        }
+
+        .contact-info {
+            background: white;
+            padding: 1.5rem;
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow);
+            margin-bottom: 1.5rem;
+        }
+
+        .footer {
+            background-color: var(--secondary-color);
+            color: white;
+            padding: 2rem 0;
+            text-align: center;
+            margin-top: 2rem;
+        }
+
+        .footer p {
+            margin-top: 1rem;
+            color: var(--light-color);
+        }
+        
+        /* 公告内容样式 */
+        .announcement-content {
+            background: white;
+            padding: 1.5rem;
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow);
+            line-height: 1.6;
+            margin-bottom: 1.5rem;
+        }
+        
+        .announcement-content a {
+            color: var(--accent-color);
+            font-weight: 600;
+        }
+        
+        .announcement-section {
+            margin-bottom: 2rem;
+        }
+        
+        .announcement-section h3 {
+            color: var(--primary-color);
+            border-bottom: 1px solid #eee;
+            padding-bottom: 0.5rem;
+            margin-bottom: 1rem;
+        }
+        
+        /* 返回链接样式 */
+        .back-link {
+            display: inline-block;
+            margin-bottom: 1.5rem;
+            padding: 0.5rem 1rem;
+            background: var(--primary-color);
+            color: white;
+            border-radius: var(--border-radius);
+            text-decoration: none;
+            transition: var(--transition);
+        }
+
+        .back-link:hover {
+            background: var(--accent-color);
+            text-decoration: none;
+            color: white;
+        }
+        
+        /* 排名内容样式 */
+        .ranking-content {
+            background: white;
+            padding: 1.5rem;
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow);
+            line-height: 1.6;
+            margin-bottom: 1.5rem;
+        }
+        
+        .ranking-section {
+            margin-bottom: 2rem;
+        }
+        
+        .ranking-section h3 {
+            color: var(--primary-color);
+            border-bottom: 1px solid #eee;
+            padding-bottom: 0.5rem;
+            margin-bottom: 1rem;
+        }
+        
+        .ranking-pre {
+            background: #f8f9fa;
+            padding: 1.5rem;
+            border-radius: var(--border-radius);
+            overflow-x: auto;
+            white-space: pre-wrap;
+            word-wrap: break-word;
+            margin-bottom: 1.5rem;
+            line-height: 1.5;
+            font-family: 'Courier New', monospace;
+            border-left: 4px solid var(--primary-color);
+        }
+        
+        /* 段落间距 */
+        .announcement-section p {
+            margin-bottom: 1rem;
+        }
+        
+        /* 列表间距 */
+        .announcement-section ul,
+        .announcement-section ol {
+            margin-bottom: 1.5rem;
+        }
+
+        /* 平板设备优化 */
+        @media (min-width: 768px) {
+            .container {
+                max-width: 720px;
+            }
+
+            .project-list {
+                display: grid;
+                grid-template-columns: repeat(2, 1fr);
+                gap: 1.5rem;
+            }
+        }
+
+        /* 桌面设备优化 */
+        @media (min-width: 992px) {
+            .container {
+                max-width: 960px;
+            }
+
+            .project-list {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        /* 大屏幕优化 */
+        @media (min-width: 1200px) {
+            .container {
+                max-width: var(--max-content-width);
+            }
+        }
+
+        /* 深色模式支持 */
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --text-color: #e0e0e0;
+                --light-color: #1a1a1a;
+                --shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+            }
+
+            body {
+                background-color: #121212;
+            }
+
+            .project-list li, pre, .contact-info, .announcement-content, .ranking-content {
+                background-color: #2d2d2d;
+            }
+            
+            .announcement-section h3, .ranking-section h3 {
+                border-bottom-color: #444;
+            }
+            
+            .ranking-pre {
+                background-color: #1e1e1e;
+                border-left-color: var(--primary-color);
+            }
+        }
+
+        /* 减少动画偏好 */
+        @media (prefers-reduced-motion: reduce) {
+            * {
+                transition-duration: 0.01ms !important;
+            }
+
+            html {
+                scroll-behavior: auto;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <div class="container">
+            <div class="logo">主场排名</div>
+        </div>
+    </header>
+
+    <main class="container">
+        <section class="content-section">
+            <a href="index.html" class="back-link">← 返回首页</a>
+
+            <div class="ranking-content">
+                <div class="ranking-section">
+                    <h3>主场名单</h3>
+                    <pre class="ranking-pre">
+1.  科帝
+2.  阳谋（游戏榜、再见MC）
+3.  Him（游戏榜、满⾎复活）
+4.  狗墨（游戏榜、贩卖泰拉）
+5.  枫希（游戏榜）
+6.  阴阳（游戏榜）
+7.  六舅（游戏榜）
+8.  303（游戏榜、死无分魂）
+9.  闪电
+10. 小球
+11. 天际（游戏榜、重返MC）
+12. 张浱（游戏榜、倒是玩啊）
+13. 德二（游戏榜、萌萌萌新）
+14. 许愿鸡
+15. 唐三
+16. 失忆者
+17. 谷子
+18. 海棠*
+19. 羊蜜
+20. 虎哥
+21. 铅笔
+22. 简严
+23. 薯片
+24. 山乞
+25. 啊龄
+26. 豆豆
+27. 大虾
+28. 曹丧
+29. 日成
+30. 舒琪（游戏榜）
+31. Dream
+32. 威尔</pre>
+                </div>
+                
+                <div class="ranking-section">
+                    <h3>黑名单</h3>
+                    <pre class="ranking-pre">
+1. 舒琪（毁单）
+2. 威尔
+3. Draem
+4. 日成</pre>
+                </div>
+                
+                <div class="ranking-section">
+                    <h3>游戏榜</h3>
+                    
+                    <h4>综合榜：</h4>
+                    <pre class="ranking-pre">
+1.  狗墨
+2.  阳谋
+3.  303
+4.  阴阳
+5.  六舅
+6.  Him
+7.  枫希
+8.  天际
+9.  失忆者
+10. Dream
+11. 小球
+12. 张浱
+13. 舒琪</pre>
+                    
+                    <h4>泰拉瑞亚：</h4>
+                    <pre class="ranking-pre">
+1. 狗墨
+2. 303</pre>
+                    
+                    <h4>我的世界：</h4>
+                    <pre class="ranking-pre">
+1. 阳谋
+2. 303
+3. 阴阳
+4. Him
+5. 六舅
+6. 枫希
+7. 天际
+8. 张浱</pre>
+                    
+                    <h4>原神：</h4>
+                    <pre class="ranking-pre">
+1. 失忆者
+2. Dream
+3. 小球
+4. 舒琪</pre>
+                    
+                    <h4>逃跑吧！少年：</h4>
+                    <pre class="ranking-pre">
+1. 303</pre>
+                </div>
+                
+                <div class="ranking-section">
+                    <h3>其他榜单</h3>
+                    
+                    <h4>肝帝榜：</h4>
+                    <pre class="ranking-pre">
+1. 303
+2. 阳谋</pre>
+                    
+                    <h4>手搓榜：</h4>
+                    <pre class="ranking-pre">
+1. 303</pre>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="footer">
+        <div class="container">
+            <p>无名剧场网页服务系统 - 试运行</p>
+            <p>© 2025 追光系列. 保留所有权利.</p>
+        </div>
+    </footer>
+</body>
+</html>

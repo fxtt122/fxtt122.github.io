@@ -1,0 +1,439 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>我的世界服务器信息</title>
+    <style>
+        /* 基础重置和变量 */
+        :root {
+            --primary-color: #3498db;
+            --secondary-color: #2c3e50;
+            --accent-color: #e74c3c;
+            --light-color: #ecf0f1;
+            --dark-color: #2c3e50;
+            --text-color: #333;
+            --text-light: #7f8c8d;
+            --shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            --border-radius: 8px;
+            --transition: all 0.3s ease;
+            --max-content-width: 1200px;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            line-height: 1.7;
+            color: var(--text-color);
+            background-color: #f9f9f9;
+            overflow-x: hidden;
+        }
+
+        /* 容器系统 */
+        .container {
+            width: 100%;
+            padding: 0 5vw;
+            margin: 0 auto;
+        }
+
+        /* 移动设备优先的布局 */
+        .header {
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            color: white;
+            padding: 1.5rem 0;
+            box-shadow: var(--shadow);
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 700;
+            text-align: center;
+        }
+
+        .content-section {
+            padding: 2rem 0;
+        }
+
+        h1 {
+            text-align: center;
+            margin-bottom: 1.5rem;
+            color: var(--secondary-color);
+        }
+
+        h2 {
+            margin: 1.5rem 0 1rem;
+            color: var(--secondary-color);
+            border-bottom: 2px solid var(--primary-color);
+            padding-bottom: 0.5rem;
+        }
+
+        h3 {
+            margin: 1.2rem 0 0.8rem;
+            color: var(--secondary-color);
+        }
+
+        ul {
+            padding-left: 1.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        li {
+            margin-bottom: 0.5rem;
+        }
+
+        a {
+            color: var(--primary-color);
+            text-decoration: none;
+            transition: var(--transition);
+        }
+
+        a:hover {
+            color: var(--accent-color);
+            text-decoration: underline;
+        }
+
+        .project-list {
+            list-style-type: none;
+            padding-left: 0;
+        }
+
+        .project-list li {
+            margin-bottom: 1rem;
+            padding: 1rem;
+            background: white;
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+        }
+
+        .project-list li:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+        }
+
+        .project-list a {
+            font-size: 1.2rem;
+            font-weight: 600;
+            display: block;
+        }
+
+        pre {
+            background: white;
+            padding: 1.5rem;
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow);
+            overflow-x: auto;
+            white-space: pre-wrap;
+            word-wrap: break-word;
+            margin-bottom: 1.5rem;
+            line-height: 1.5;
+            font-family: inherit;
+        }
+
+        .contact-info {
+            background: white;
+            padding: 1.5rem;
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow);
+            margin-bottom: 1.5rem;
+        }
+
+        .footer {
+            background-color: var(--secondary-color);
+            color: white;
+            padding: 2rem 0;
+            text-align: center;
+            margin-top: 2rem;
+        }
+
+        .footer p {
+            margin-top: 1rem;
+            color: var(--light-color);
+        }
+        
+        /* 公告内容样式 */
+        .announcement-content {
+            background: white;
+            padding: 1.5rem;
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow);
+            line-height: 1.6;
+            margin-bottom: 1.5rem;
+        }
+        
+        .announcement-content a {
+            color: var(--accent-color);
+            font-weight: 600;
+        }
+        
+        .announcement-section {
+            margin-bottom: 2rem;
+        }
+        
+        .announcement-section h3 {
+            color: var(--primary-color);
+            border-bottom: 1px solid #eee;
+            padding-bottom: 0.5rem;
+            margin-bottom: 1rem;
+        }
+        
+        /* 返回链接样式 */
+        .back-link {
+            display: inline-block;
+            margin-bottom: 1.5rem;
+            padding: 0.5rem 1rem;
+            background: var(--primary-color);
+            color: white;
+            border-radius: var(--border-radius);
+            text-decoration: none;
+            transition: var(--transition);
+        }
+
+        .back-link:hover {
+            background: var(--accent-color);
+            text-decoration: none;
+            color: white;
+        }
+        
+        /* 服务器信息样式 */
+        .server-content {
+            background: white;
+            padding: 1.5rem;
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow);
+            line-height: 1.6;
+            margin-bottom: 1.5rem;
+        }
+        
+        .server-section {
+            margin-bottom: 2rem;
+        }
+        
+        .server-section h3 {
+            color: var(--primary-color);
+            border-bottom: 1px solid #eee;
+            padding-bottom: 0.5rem;
+            margin-bottom: 1rem;
+        }
+        
+        /* 服务器卡片样式 */
+        .server-card {
+            background: white;
+            padding: 1.5rem;
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow);
+            margin-bottom: 1.5rem;
+            transition: var(--transition);
+        }
+
+        .server-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+        }
+
+        .server-card h3 {
+            color: var(--primary-color);
+            margin-bottom: 1rem;
+        }
+
+        .ip-address {
+            font-family: 'Courier New', monospace;
+            background: #f8f9fa;
+            padding: 0.8rem;
+            border-radius: var(--border-radius);
+            border-left: 4px solid var(--primary-color);
+            margin: 1rem 0;
+        }
+        
+        /* 段落间距 */
+        .announcement-section p {
+            margin-bottom: 1rem;
+        }
+        
+        /* 列表间距 */
+        .announcement-section ul,
+        .announcement-section ol {
+            margin-bottom: 1.5rem;
+        }
+
+        /* 平板设备优化 */
+        @media (min-width: 768px) {
+            .container {
+                max-width: 720px;
+            }
+
+            .project-list {
+                display: grid;
+                grid-template-columns: repeat(2, 1fr);
+                gap: 1.5rem;
+            }
+            
+            .server-grid {
+                display: grid;
+                grid-template-columns: repeat(2, 1fr);
+                gap: 1.5rem;
+            }
+        }
+
+        /* 桌面设备优化 */
+        @media (min-width: 992px) {
+            .container {
+                max-width: 960px;
+            }
+
+            .project-list {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            
+            .server-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        /* 大屏幕优化 */
+        @media (min-width: 1200px) {
+            .container {
+                max-width: var(--max-content-width);
+            }
+        }
+
+        /* 深色模式支持 */
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --text-color: #e0e0e0;
+                --light-color: #1a1a1a;
+                --shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+            }
+
+            body {
+                background-color: #121212;
+            }
+
+            .project-list li, pre, .contact-info, .announcement-content, .server-content, .server-card {
+                background-color: #2d2d2d;
+            }
+            
+            .announcement-section h3, .server-section h3 {
+                border-bottom-color: #444;
+            }
+            
+            .ip-address {
+                background-color: #1e1e1e;
+                border-left-color: var(--primary-color);
+            }
+        }
+
+        /* 减少动画偏好 */
+        @media (prefers-reduced-motion: reduce) {
+            * {
+                transition-duration: 0.01ms !important;
+            }
+
+            html {
+                scroll-behavior: auto;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <div class="container">
+            <div class="logo">我的世界服务器信息（同步中）</div>
+        </div>
+    </header>
+
+    <main class="container">
+        <section class="content-section">
+            <a href="servers.html" class="back-link">← 返回</a>
+
+            <div class="server-content">
+                <div class="server-section">
+                    <h2>服务器地址及名称</h2>
+                    <h4>注意，请逐行复制到游戏内，请勿打乱顺序或更改名称！<h4>
+                    
+                    <div class="server-section">
+                        <div class="server-card">
+                            <h3>服务器统一信息</h3>
+                            <h4>IPv6</h4>
+                            <pre class="ip-address">
+服务器名称：追光服务器-Minecraft通用
+服务器地址：mcv6.zgxl.us.kg:25565</pre>
+                        </div>
+                        
+                        <div class="server-card">
+                            <h3>服务器统一信息2</h3>
+                            <h4>IPv6</h4>
+                            <pre class="ip-address">
+服务器名称：追光服务器-Minecraft通用-Lv UP
+服务器地址：mcupv6.zgxl.us.kg:25565</pre>
+                        </div>
+                        
+                        <div class="server-card">
+                            <h3>服务器统一信息3</h3>
+                            <h4>IPv4</h4>
+                            <pre class="ip-address">
+服务器名称：追光服务器-Minecraft通用-杭州
+服务器地址：*需向科帝支付2元可开通200M高速IPv4线路30天*</pre>
+                        </div>
+                        
+                        <div class="server-card">
+                            <h3>服务器应急信息</h3>
+                            <h4>IPv4</h4>
+                            <pre class="ip-address">
+服务器名称：追光服务器-Minecraft通用-香港应急
+服务器地址：mcv4m-xg.zgxl.us.kg:25560</pre>
+                        </div>
+                    </div>
+                </div>
+
+                    <h2>服务器详细信息</h2>
+
+                <div class="server-grid">
+                    
+                    <div class="server-card">
+                        <h3>纯纯纯爷存</h3>
+                        <p><strong>游戏版本：</strong>1.20.1-Froge</p>
+                        <p><strong>难度：</strong>简单</p>
+                        <p><strong>编号：</strong>#13</p>
+                        <p><strong>特权：</strong>暂无</p>
+                    </div>
+
+                    <div class="server-card">
+                        <h3>*</h3>
+                        <p><strong>游戏版本：</strong>1.20.1-Froge</p>
+                        <p><strong>难度：</strong>简单</p>
+                        <p><strong>编号：</strong>#13</p>
+                        <p><strong>特权：</strong>暂无</p>
+                    </div>
+
+                    <div class="server-card">
+                        <h3>*</h3>
+                        <p><strong>游戏版本：</strong>1.20.1-Froge</p>
+                        <p><strong>难度：</strong>简单</p>
+                        <p><strong>编号：</strong>#13</p>
+                        <p><strong>特权：</strong>暂无</p>
+                    </div>
+
+                </div>
+
+            </div>
+        </section>
+    </main>
+
+    <footer class="footer">
+        <div class="container">
+            <p>无名剧场网页服务系统 - 试运行</p>
+            <p>© 2025 追光系列. 保留所有权利.</p>
+        </div>
+    </footer>
+</body>
+</html>

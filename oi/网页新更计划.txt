@@ -1,0 +1,23 @@
+我的世界服务器信息添加
+
+
+完结信息：
+<span style="color: #27ae60;">已完结</span>（绿色字体）
+进行中（无颜色）
+<span style="color: #e74c3c;">已毁图</span>（红色字体）
+
+周目信息：
+1周目（无颜色）
+<span style="color: #27ae60;">永恒</span>（绿色字体）
+<span style="color: #e74c3c;">一次性</span>（红色字体）
+
+重建信息：
+<span style="color: #27ae60;">可申请2周目</span>（绿色字体）
+<span style="color: #f39c12;">计划2周目中……</span>（橙色字体）
+未完结（无颜色）
+<span style="color: #e74c3c;">未计划重建</span>（红色字体）
+（当周目信息为“永恒”或“一次性”时不显示此条）
+
+<span style="color: #27ae60;">绿色</span>
+<span style="color: #f39c12;">橙色</span>
+<span style="color: #e74c3c;">红色</span>

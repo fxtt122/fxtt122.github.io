@@ -1,0 +1,396 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>我的世界服务器更新历史</title>
+    <link rel="icon" type="image/png" href="favicon/favicon-96x96.png" sizes="96x96" />
+    <link rel="icon" type="image/svg+xml" href="favicon/favicon.svg" />
+    <link rel="shortcut icon" href="favicon/favicon.ico" />
+    <link rel="apple-touch-icon" sizes="180x180" href="favicon/apple-touch-icon.png" />
+    <link rel="manifest" href="favicon/site.webmanifest" />
+    <style>
+        /* 基础重置和变量 - 保持原样，仅追加版本号日期样式 */
+        :root {
+            --primary-color: #3498db;
+            --secondary-color: #2c3e50;
+            --accent-color: #e74c3c;
+            --light-color: #ecf0f1;
+            --dark-color: #2c3e50;
+            --text-color: #333;
+            --text-light: #7f8c8d;
+            --shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            --border-radius: 8px;
+            --transition: all 0.3s ease;
+            --max-content-width: 1200px;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            line-height: 1.7;
+            color: var(--text-color);
+            background-color: #f9f9f9;
+            overflow-x: hidden;
+        }
+
+        /* 容器系统 */
+        .container {
+            width: 100%;
+            padding: 0 5vw;
+            margin: 0 auto;
+        }
+
+        /* 头部样式 */
+        .header {
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            color: white;
+            padding: 1.5rem 0;
+            box-shadow: var(--shadow);
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 700;
+            text-align: center;
+        }
+
+        .content-section {
+            padding: 2rem 0;
+        }
+
+        /* 标题样式 */
+        h1 {
+            text-align: center;
+            margin-bottom: 1.5rem;
+            color: var(--secondary-color);
+            font-size: 2rem;
+        }
+
+        h2 {
+            margin: 1.5rem 0 1rem;
+            color: var(--secondary-color);
+            border-bottom: 2px solid var(--primary-color);
+            padding-bottom: 0.5rem;
+            font-size: 1.5rem;
+        }
+
+        .back-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 2rem;
+        }
+
+        .back-link {
+            display: inline-block;
+            padding: 0.5rem 1rem;
+            background: var(--primary-color);
+            color: white;
+            border-radius: var(--border-radius);
+            text-decoration: none;
+            transition: var(--transition);
+            font-weight: 600;
+        }
+
+        .back-link:hover {
+            background: var(--accent-color);
+            text-decoration: none;
+            color: white;
+            transform: translateY(-2px);
+        }
+
+        .update-day {
+            background: white;
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow);
+            margin-bottom: 2rem;
+            padding: 1.5rem;
+            transition: var(--transition);
+        }
+
+        .update-day:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.12);
+        }
+
+        .date-header {
+            margin-bottom: 1.5rem;
+            padding-bottom: 0.8rem;
+            border-bottom: 2px solid var(--primary-color);
+        }
+
+        .date-title {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: baseline;
+            gap: 0.5rem;
+            font-size: 1.4rem;
+            color: var(--secondary-color);
+            font-weight: 700;
+        }
+
+        /* 更新内容列表 */
+        .update-content {
+            padding-left: 0;
+            list-style-type: none;
+        }
+
+        .update-item {
+            margin-bottom: 1rem;
+            padding: 0.8rem;
+            background: #f8f9fa;
+            border-radius: 6px;
+            border-left: 4px solid var(--primary-color);
+            transition: var(--transition);
+        }
+
+        .update-item:hover {
+            background: #eef5ff;
+        }
+
+        /* update-description 已被移除，直接使用 update-details 展示详情 */
+        .update-details {
+            margin-left: 1rem;
+            padding-left: 1rem;
+            border-left: 2px solid #eee;
+            font-size: 1.05rem; /* 继承原描述的字号 */
+        }
+
+        .update-details li {
+            margin-bottom: 0.3rem;
+        }
+
+        /* 更新说明文字 */
+        .update-intro {
+            text-align: center;
+            margin-bottom: 2rem;
+            color: var(--text-light);
+            font-size: 1.1rem;
+        }
+
+        /* 页脚 */
+        .footer {
+            background-color: var(--secondary-color);
+            color: white;
+            padding: 2rem 0;
+            text-align: center;
+            margin-top: 2rem;
+        }
+
+        .footer p {
+            margin-top: 1rem;
+            color: var(--light-color);
+        }
+
+        /* 深色模式支持 */
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --text-color: #e0e0e0;
+                --light-color: #1a1a1a;
+                --shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+            }
+
+            body {
+                background-color: #121212;
+            }
+
+            .update-day {
+                background-color: #2d2d2d;
+            }
+
+            .update-item {
+                background: #1a1a1a;
+                border-left-color: var(--primary-color);
+            }
+
+            .update-item:hover {
+                background: #252525;
+            }
+
+            .update-details {
+                border-left-color: #444;
+            }
+
+            .date-title {
+                color: #e0e0e0;
+            }
+
+            .footer p {
+               color: var(--text-color);
+            }
+
+            /* 新增：让h1在深色模式下使用主色 */
+           h1 {
+                color: #e0e0e0;
+            }
+        }
+
+        /* 平板设备优化 */
+        @media (min-width: 768px) {
+            .container {
+                max-width: 720px;
+            }
+        }
+
+        /* 桌面设备优化 */
+        @media (min-width: 992px) {
+            .container {
+                max-width: 960px;
+            }
+        }
+
+        /* 大屏幕优化 */
+        @media (min-width: 1200px) {
+            .container {
+                max-width: var(--max-content-width);
+            }
+        }
+
+        /* 减少动画偏好 */
+        @media (prefers-reduced-motion: reduce) {
+            * {
+                transition-duration: 0.01ms !important;
+            }
+
+            html {
+                scroll-behavior: auto;
+            }
+            
+            .update-day:hover {
+                transform: none;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <div class="container">
+            <div class="logo">我的世界服务器更新历史</div>
+        </div>
+    </header>
+
+    <main class="container">
+        <section class="content-section">
+            <div class="back-row">
+                <a href="minecraft.html" class="back-link">← 返回</a>
+            </div>
+
+<h1>当前版本：V2.6</h1>
+
+            <div class="update-day">
+                <div class="date-header">
+                    <div class="date-title">
+                        <span class="version-number">V3.0（一个预告，预计7年内升级完成）</span>
+                    </div>
+                </div>
+                <ul class="update-content">
+                    <li class="update-item">
+                        <ul class="update-details">
+                            <li>服务器从“线路式”升级为“端口式”</li>
+                            <li>一个服务器分配一个独立域名，互不干扰</li>
+                            <li>没有特殊权限的服务器24小时常态开放</li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+
+            <div class="update-day">
+                <div class="date-header">
+                    <div class="date-title">
+                        <span class="version-number">V2.6</span>
+                    </div>
+                </div>
+                <ul class="update-content">
+                    <li class="update-item">
+                        <ul class="update-details">
+                            <li>永久解决了很少情况下需要等待1~30分钟的同步问题，DNS永久指向服务器的固定IPv6</li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+
+            <div class="update-day">
+                <div class="date-header">
+                    <div class="date-title">
+                        <span class="version-number">V2.5</span>
+                    </div>
+                </div>
+                <ul class="update-content">
+                    <li class="update-item">
+                        <ul class="update-details">
+                            <li>服务器线路从“IP式”转为“域名式”</li>
+                            <li>域名式线路省去了每次进游戏都要看一遍公告的烦恼</li>
+                            <li>IPv4线路出了付费高速稳定线，很少故障，也很少有人租的起</li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+
+            <div class="update-day">
+                <div class="date-header">
+                    <div class="date-title">
+                        <span class="version-number">V2.0</span>
+                    </div>
+                </div>
+                <ul class="update-content">
+                    <li class="update-item">
+                        <ul class="update-details">
+                            <li>引入了IPv6，加入服务器变得稳定、低延迟、简单，就是每次玩都要看公告，而且有少数人不支持IPv6</li>
+                            <li>使用了更稳定的IPv4源</li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+
+            <div class="update-day">
+                <div class="date-header">
+                    <div class="date-title">
+                        <span class="version-number">V1.5</span>
+                    </div>
+                </div>
+                <ul class="update-content">
+                    <li class="update-item">
+                        <ul class="update-details">
+                            <li>更换了IPv4源，解决了不稳定的问题，但每月流量有限，月末有概率玩不了</li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+
+            <div class="update-day">
+                <div class="date-header">
+                    <div class="date-title">
+                        <span class="version-number">V1.0</span>
+                    </div>
+                </div>
+                <ul class="update-content">
+                    <li class="update-item">
+                        <ul class="update-details">
+                            <li>最原初的版本</li>
+                            <li>用着限宽、限流、不稳定的IPv4源，但它能玩啊！</li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+
+        </section>
+    </main>
+
+    <footer class="footer">
+        <div class="container">
+            <p>无名剧场网页服务系统</p>
+            <p>© 2025 追光系列. 保留所有权利.</p>
+        </div>
+    </footer>
+</body>
+</html>

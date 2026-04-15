@@ -1,0 +1,616 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>泰拉瑞亚服务器信息</title>
+<link rel="icon" type="image/png" href="favicon/favicon-96x96.png" sizes="96x96" />
+<link rel="icon" type="image/svg+xml" href="favicon/favicon.svg" />
+<link rel="shortcut icon" href="favicon/favicon.ico" />
+<link rel="apple-touch-icon" sizes="180x180" href="favicon/apple-touch-icon.png" />
+<link rel="manifest" href="favicon/site.webmanifest" />
+    <style>
+        /* 基础重置和变量 */
+        :root {
+            --primary-color: #3498db;
+            --secondary-color: #2c3e50;
+            --accent-color: #e74c3c;
+            --light-color: #ecf0f1;
+            --dark-color: #2c3e50;
+            --text-color: #333;
+            --text-light: #7f8c8d;
+            --shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            --border-radius: 8px;
+            --transition: all 0.3s ease;
+            --max-content-width: 1200px;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            line-height: 1.7;
+            color: var(--text-color);
+            background-color: #f9f9f9;
+            overflow-x: hidden;
+        }
+
+        /* 记得更完后删除此条 */
+    .warning-note {
+    background: linear-gradient(135deg, #FFD700, #FFD700);
+    border: 2px solid #f1b0b7;
+    color: #721c24;
+    padding: 1.25rem;
+    border-radius: 16px;  /* 更大的圆角，更圆润 */
+    margin-bottom: 2rem;
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.08), inset 0 1px 0 rgba(255, 255, 255, 0.5);
+    position: relative;
+    overflow: hidden;
+    font-weight: 600;
+    font-size: 1.05rem;
+    line-height: 1.6;
+    transition: all 0.3s ease;
+    border-left: 6px solid #e74c3c;  /* 左侧强调色 */
+}
+
+
+
+.warning-note:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.12), inset 0 1px 0 rgba(255, 255, 255, 0.6);
+    background: linear-gradient(135deg, #f9dbdf, #f7ccd1);
+}
+
+/* 深色模式适配 */
+@media (prefers-color-scheme: dark) {
+    .warning-note {
+        background: linear-gradient(135deg, #3c2425, #4d2f31);
+        border: 2px solid #5a3739;
+        color: #ffb3b8;
+        box-shadow: 0 6px 15px rgba(0, 0, 0, 0.3), inset 0 1px 0 rgba(255, 255, 255, 0.1);
+        border-left-color: #ff6b6b;
+    }
+    
+    .warning-note:hover {
+        background: linear-gradient(135deg, #452a2c, #553638);
+        box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4), inset 0 1px 0 rgba(255, 255, 255, 0.15);
+    }
+    
+    .warning-note::before {
+        filter: brightness(1.2);
+    }
+}
+
+/* 移动设备优化 */
+@media (max-width: 768px) {
+    .warning-note {
+        padding: 1rem;
+        border-radius: 12px;
+        margin-bottom: 1.5rem;
+    }
+    
+    .warning-note::before {
+        position: static;
+        transform: none;
+        display: inline-block;
+        margin-right: 0.75rem;
+        vertical-align: middle;
+        font-size: 1.5rem;
+    }
+    
+    .warning-note strong {
+        display: inline;
+        margin-left: 0;
+        margin-bottom: 0;
+    }
+}
+
+/* 高对比度模式支持 */
+@media (prefers-contrast: high) {
+    .warning-note {
+        border: 3px solid #c00;
+        background: #ffeaea;
+    }
+}
+
+/* 减少动画偏好 */
+@media (prefers-reduced-motion: reduce) {
+    .warning-note {
+        transition: none;
+    }
+    
+    .warning-note:hover {
+        transform: none;
+    }
+}
+
+        /* 容器系统 */
+        .container {
+            width: 100%;
+            padding: 0 5vw;
+            margin: 0 auto;
+        }
+
+        /* 移动设备优先的布局 */
+        .header {
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            color: white;
+            padding: 1.5rem 0;
+            box-shadow: var(--shadow);
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 700;
+            text-align: center;
+        }
+
+        .content-section {
+            padding: 2rem 0;
+        }
+
+        h1 {
+            text-align: center;
+            margin-bottom: 1.5rem;
+            color: var(--secondary-color);
+        }
+
+        h2 {
+            margin: 1.5rem 0 1rem;
+            color: var(--secondary-color);
+            border-bottom: 2px solid var(--primary-color);
+            padding-bottom: 0.5rem;
+        }
+
+        h3 {
+            margin: 1.2rem 0 0.8rem;
+            color: var(--secondary-color);
+        }
+
+        ul {
+            padding-left: 1.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        li {
+            margin-bottom: 0.5rem;
+        }
+
+        a {
+            color: var(--primary-color);
+            text-decoration: none;
+            transition: var(--transition);
+        }
+
+        a:hover {
+            color: var(--accent-color);
+            text-decoration: underline;
+        }
+
+        .project-list {
+            list-style-type: none;
+            padding-left: 0;
+        }
+
+        .project-list li {
+            margin-bottom: 1rem;
+            padding: 1rem;
+            background: white;
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+        }
+
+        .project-list li:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+        }
+
+        .project-list a {
+            font-size: 1.2rem;
+            font-weight: 600;
+            display: block;
+        }
+
+        pre {
+            background: white;
+            padding: 1.5rem;
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow);
+            overflow-x: auto;
+            white-space: pre-wrap;
+            word-wrap: break-word;
+            margin-bottom: 1.5rem;
+            line-height: 1.5;
+            font-family: inherit;
+        }
+
+        .contact-info {
+            background: white;
+            padding: 1.5rem;
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow);
+            margin-bottom: 1.5rem;
+        }
+
+        .footer {
+            background-color: var(--secondary-color);
+            color: white;
+            padding: 2rem 0;
+            text-align: center;
+            margin-top: 2rem;
+        }
+
+        .footer p {
+            margin-top: 1rem;
+            color: var(--light-color);
+        }
+        
+        /* 公告内容样式 */
+        .announcement-content {
+            background: white;
+            padding: 1.5rem;
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow);
+            line-height: 1.6;
+            margin-bottom: 1.5rem;
+        }
+        
+        .announcement-content a {
+            color: var(--accent-color);
+            font-weight: 600;
+        }
+        
+        .announcement-section {
+            margin-bottom: 2rem;
+        }
+        
+        .announcement-section h3 {
+            color: var(--primary-color);
+            border-bottom: 1px solid #eee;
+            padding-bottom: 0.5rem;
+            margin-bottom: 1rem;
+        }
+        
+        /* 返回链接样式 */
+        .back-link {
+            display: inline-block;
+            margin-bottom: 1.5rem;
+            padding: 0.5rem 1rem;
+            background: var(--primary-color);
+            color: white;
+            border-radius: var(--border-radius);
+            text-decoration: none;
+            transition: var(--transition);
+        }
+
+        .back-link:hover {
+            background: var(--accent-color);
+            text-decoration: none;
+            color: white;
+        }
+        
+        /* 服务器信息样式 */
+        .server-content {
+            background: white;
+            padding: 1.5rem;
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow);
+            line-height: 1.6;
+            margin-bottom: 1.5rem;
+        }
+        
+        .server-section {
+            margin-bottom: 2rem;
+        }
+        
+        .server-section h3 {
+            color: var(--primary-color);
+            border-bottom: 1px solid #eee;
+            padding-bottom: 0.5rem;
+            margin-bottom: 1rem;
+        }
+        
+        /* 服务器卡片样式 */
+        .server-card {
+            background: white;
+            padding: 1.5rem;
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow);
+            margin-bottom: 1.5rem;
+            transition: var(--transition);
+        }
+
+        .server-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+        }
+
+        .server-card h3 {
+            color: var(--primary-color);
+            margin-bottom: 1rem;
+        }
+
+        .ip-address {
+            font-family: 'Courier New', monospace;
+            background: #f8f9fa;
+            padding: 0.8rem;
+            border-radius: var(--border-radius);
+            border-left: 4px solid var(--primary-color);
+            margin: 1rem 0;
+        }
+        
+        /* 段落间距 */
+        .announcement-section p {
+            margin-bottom: 1rem;
+        }
+        
+        /* 列表间距 */
+        .announcement-section ul,
+        .announcement-section ol {
+            margin-bottom: 1.5rem;
+        }
+
+        /* 平板设备优化 */
+        @media (min-width: 768px) {
+            .container {
+                max-width: 720px;
+            }
+
+            .project-list {
+                display: grid;
+                grid-template-columns: repeat(2, 1fr);
+                gap: 1.5rem;
+            }
+            
+            .server-grid {
+                display: grid;
+                grid-template-columns: repeat(2, 1fr);
+                gap: 1.5rem;
+            }
+        }
+
+        /* 桌面设备优化 */
+        @media (min-width: 992px) {
+            .container {
+                max-width: 960px;
+            }
+
+            .project-list {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            
+            .server-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        /* 大屏幕优化 */
+        @media (min-width: 1200px) {
+            .container {
+                max-width: var(--max-content-width);
+            }
+        }
+
+        /* 深色模式支持 */
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --text-color: #e0e0e0;
+                --light-color: #1a1a1a;
+                --shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+            }
+
+            body {
+                background-color: #121212;
+            }
+
+            .project-list li, pre, .contact-info, .announcement-content, .server-content, .server-card {
+                background-color: #2d2d2d;
+            }
+            
+            .announcement-section h3, .server-section h3 {
+                border-bottom-color: #444;
+            }
+            
+            /* 新增：让h1,h2,h3在深色模式下使用主色 */
+           h1,h2,h3 {
+                color: #e0e0e0;
+            }
+
+           /* 新增：修复footer p在深色模式下的颜色 */
+           .footer p {
+               color: var(--text-color);
+            }
+
+            .ip-address {
+                background-color: #1e1e1e;
+                border-left-color: var(--primary-color);
+            }
+        }
+
+        /* 减少动画偏好 */
+        @media (prefers-reduced-motion: reduce) {
+            * {
+                transition-duration: 0.01ms !important;
+            }
+
+            html {
+                scroll-behavior: auto;
+            }
+        }
+    </style>
+    <script>
+        // 页面加载完成后立即弹出警告
+        window.addEventListener('DOMContentLoaded', function() {
+            alert('在修了，在修了！');
+        });
+    </script>
+</head>
+<body>
+    <header class="header">
+        <div class="container">
+            <div class="logo">泰拉瑞亚服务器信息</div>
+        </div>
+    </header>
+
+    <main class="container">
+        <section class="content-section">
+            <a href="servers.html" class="back-link">← 返回</a>
+
+            <div class="warning-note">
+                <strong>该页面所有内容均可信~               (本框颜色乱改改的，后期删掉</strong>
+            </div>
+
+            <div class="server-content">
+                <div class="server-section">
+                    <h2>服务器地址及名称</h2>
+                    <h4>注意，可以只复制地址段，端口背下来手动输入即可！<h4>
+                    
+                    <div class="server-section">
+                        <div class="server-card">
+                            <h3>服务器统一信息</h3>
+                            <h4>IPv4</h4>
+                            <pre class="ip-address">
+服务器地址：tlv4.zgxl.us.kg
+服务器端口：15569</pre>
+                        </div>
+
+                        <div class="server-card">
+                            <h3>服务器应急信息-偶尔能用的超低延迟</h3>
+                            <h4>IPv4</h4>
+                            <pre class="ip-address">
+服务器地址：tlv4m-hz.zgxl.us.kg
+服务器端口：17777</pre>
+                        </div>
+                        
+                    </div>
+                </div>
+
+                <h2>服务器详细信息</h2>
+
+                <h2>1.4.3.2.3</h2>
+
+                <div class="server-grid">
+                    
+                    <div class="server-card">
+                        <img src="servers icons/terraria/Corrupt.webp" alt="server-icon"><h3>No</h3>
+                        <p><strong>难度：</strong><span style="color: #FF69B4;">Journey旅行</span></p>
+                        <p><strong>编号：</strong>1</p>
+                        <p><strong>特权：</strong>暂无</p>
+                        <p><strong>地图大小：</strong>Small小</p>
+                        <p><strong>恶地：</strong><span style="color: #7A1FA0;">Corrupt腐败</span></p>
+                        <p><strong>进度：</strong>非困难模式</p>
+                    </div>
+
+                    <div class="server-card">
+                        <img src="servers icons/terraria/Crimson.webp" alt="server-icon"><h3>No one can do it.</h3>
+                        <p><strong>难度：</strong><span style="color: #FF0000;">Master大师</span></p>
+                        <p><strong>编号：</strong>2</p>
+                        <p><strong>特权：</strong>暂无</p>
+                        <p><strong>地图大小：</strong>Small小</p>
+                        <p><strong>恶地：</strong><span style="color: #FF0000;">Crimson猩红</span></p>
+                        <p><strong>进度：</strong>非困难模式</p>
+                    </div>
+
+                    <div class="server-card">
+                        <img src="servers icons/terraria/Corrupt.webp" alt="server-icon"><h3>Not</h3>
+                        <p><strong>难度：</strong><span style="color: #FF69B4;">Journey旅行</span></p>
+                        <p><strong>编号：</strong>3</p>
+                        <p><strong>特权：</strong>暂无</p>
+                        <p><strong>地图大小：</strong>Small小</p>
+                        <p><strong>恶地：</strong><span style="color: #7A1FA0;">Corrupt腐败</span></p>
+                        <p><strong>进度：</strong>非困难模式</p>
+                    </div>
+
+                    <div class="server-card">
+                        <img src="servers icons/terraria/Corrupt.webp" alt="server-icon"><h3>Novice World</h3>
+                        <p><strong>难度：</strong><span style="color: #FF69B4;">Journey旅行</span></p>
+                        <p><strong>编号：</strong>4</p>
+                        <p><strong>特权：</strong>该地图为重点地图，需要有看管才能进入！</p>
+                        <p><strong>地图大小：</strong>Medium中</p>
+                        <p><strong>恶地：</strong><span style="color: #7A1FA0;">Corrupt腐败</span></p>
+                        <p><strong>进度：</strong>非困难模式</p>
+                    </div>
+
+                </div>
+
+                <h2>1.4.4.9</h2>
+
+                <div class="server-grid">
+
+                    <div class="server-card">
+                        <img src="servers icons/terraria/Crimson-hard.webp" alt="server-icon"><h3>fast life</h3>
+                        <p><strong>难度：</strong><span style="color: #FF69B4;">Journey旅行</span></p>
+                        <p><strong>编号：</strong>1</p>
+                        <p><strong>特权：</strong>速通用的，考虑再进</p>
+                        <p><strong>地图大小：</strong>Small小</p>
+                        <p><strong>恶地：</strong><span style="color: #FF0000;">Crimson猩红</span></p>
+                        <p><strong>进度：</strong><span style="color: #FFD700;">困难模式</span></p>
+                    </div>
+
+                    <div class="server-card">
+                        <img src="servers icons/terraria/Crimson.webp" alt="server-icon"><h3>New Novice World</h3>
+                        <p><strong>难度：</strong><span style="color: #FF69B4;">Journey旅行</span></p>
+                        <p><strong>编号：</strong>2</p>
+                        <p><strong>特权：</strong>该地图为次重点地图，需要有看管才能进入！</p>
+                        <p><strong>地图大小：</strong>Medium中</p>
+                        <p><strong>恶地：</strong><span style="color: #FF0000;">Crimson猩红</span></p>
+                        <p><strong>进度：</strong>非困难模式</p>
+                    </div>
+
+                    <div class="server-card">
+                        <img src="servers icons/terraria/Crimson.webp" alt="server-icon"><h3>wc</h3>
+                        <p><strong>难度：</strong><span style="color: #FF69B4;">Journey旅行</span></p>
+                        <p><strong>编号：</strong>3</p>
+                        <p><strong>特权：</strong>仅 狗墨 可进入</p>
+                        <p><strong>地图大小：</strong>Medium中</p>
+                        <p><strong>恶地：</strong><span style="color: #FF0000;">Crimson猩红</span></p>
+                        <p><strong>进度：</strong>非困难模式</p>
+                    </div>
+
+
+                </div>
+
+          <h2>1.4.5</h2>
+
+                <div class="server-grid">
+                    
+                    <div class="server-card">
+                        <img src="servers icons/terraria/Crimson.webp" alt="server-icon"><h3>追光服务器-纯爷爷爷存</h3>
+                        <p><strong>难度：</strong><span style="color: #FF69B4;">Journey旅行</span></p>
+                        <p><strong>编号：</strong>1</p>
+                        <p><strong>特权：</strong>暂无</p>
+                        <p><strong>地图大小：</strong>Medium中</p>
+                        <p><strong>恶地：</strong><span style="color: #FF0000;">Crimson猩红</span></p>
+                        <p><strong>进度：</strong>非困难模式</p>
+                    </div>
+
+                </div>
+
+            </div>
+
+            <div class="server-content">
+                <h2>附加信息</h2>
+                <pre>服务器图标也能反映当前地图进度及恶地等信息哦~
+服务器编号每个版本会单独排列，所以记得报出版本号哦~</pre>
+            </div>
+
+        </section>
+    </main>
+
+    <footer class="footer">
+        <div class="container">
+            <p>无名剧场网页服务系统</p>
+            <p>© 2025 追光系列. 保留所有权利.</p>
+        </div>
+    </footer>
+</body>
+</html>

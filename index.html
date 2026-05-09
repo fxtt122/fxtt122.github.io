@@ -1,12 +1,660 @@
-<title>什么书？</title>
-<p>海内存知己，天涯……若比邻？</p>
-<p>今天是一年一度……的什么节？</p>
-<p>烧毁……什么？</p>
-<p>哦……不对</p>
-<p>等等</p>
-<p>我会回来……的？</p>
-<p>抱歉，再见？</p>
-<p>害，五一放完假之后再见吧……</p>
-<p>这下又要有事情干了……</p>
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>无名剧场网页服务系统</title>
+<link rel="icon" type="image/png" href="favicon/favicon-96x96.png" sizes="96x96" />
+<link rel="icon" type="image/svg+xml" href="favicon/favicon.svg" />
+<link rel="shortcut icon" href="favicon/favicon.ico" />
+<link rel="apple-touch-icon" sizes="180x180" href="favicon/apple-touch-icon.png" />
+<link rel="manifest" href="favicon/site.webmanifest" />
+    <style>
+        /* 基础重置和变量 - 完全保持原样 */
+        :root {
+            --primary-color: #3498db;
+            --secondary-color: #2c3e50;
+            --accent-color: #e74c3c;
+            --light-color: #ecf0f1;
+            --dark-color: #2c3e50;
+            --text-color: #333;
+            --text-light: #7f8c8d;
+            --shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            --border-radius: 8px;
+            --transition: all 0.3s ease;
+            --max-content-width: 1200px;
+        }
 
-<p>一扇门……一台电脑……两块硬盘……一个…<span style="color: #e74c3c;">家</span>？</p>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            line-height: 1.7;
+            color: var(--text-color);
+            background-color: #f9f9f9;
+            overflow-x: hidden;
+        }
+
+        /* 容器系统 - 完全保持原样 */
+        .container {
+            width: 100%;
+            padding: 0 5vw;
+            margin: 0 auto;
+        }
+
+        /* 移动设备优先的布局 - 完全保持原样 */
+        .header {
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            color: white;
+            padding: 1.5rem 0;
+            box-shadow: var(--shadow);
+        }
+
+        .logo {
+            font-size: 1.8rem; /* 保持原字号 */
+            font-weight: 700;
+            text-align: center;
+        }
+
+        .content-section {
+            padding: 2rem 0;
+        }
+
+        /* 标题字号和样式 - 完全保持原样 */
+        h1 {
+            text-align: center;
+            margin-bottom: 1.5rem;
+            color: var(--secondary-color);
+            font-size: 2rem; /* 保持原字号 */
+        }
+
+        h2 {
+            margin: 1.5rem 0 1rem;
+            color: var(--secondary-color);
+            border-bottom: 2px solid var(--primary-color);
+            padding-bottom: 0.5rem;
+            font-size: 1.5rem; /* 保持原字号 */
+        }
+
+        h3 {
+            margin: 1.2rem 0 0.8rem;
+            color: var(--secondary-color);
+            font-size: 1.3rem; /* 保持原字号 */
+        }
+
+        h4 {
+            margin: 1rem 0 0.5rem;
+            color: var(--accent-color);
+            font-size: 1.1rem; /* 保持原字号 */
+        }
+
+        /* 列表样式 - 完全保持原样 */
+        ul {
+            padding-left: 1.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        li {
+            margin-bottom: 0.5rem;
+        }
+
+        /* 链接样式 - 完全保持原样 */
+        a {
+            color: var(--primary-color);
+            text-decoration: none;
+            transition: var(--transition);
+        }
+
+        a:hover {
+            color: var(--accent-color);
+            text-decoration: underline;
+        }
+
+        .project-list {
+            list-style-type: none;
+            padding-left: 0;
+        }
+
+        .project-list li {
+            margin-bottom: 1rem;
+            padding: 1rem;
+            background: white;
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+        }
+
+        .project-list li:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+        }
+
+        .project-list a {
+            font-size: 1.2rem; /* 保持原字号 */
+            font-weight: 600;
+            display: block;
+        }
+
+        pre {
+            background: white;
+            padding: 1.5rem;
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow);
+            overflow-x: auto;
+            white-space: pre-wrap;
+            word-wrap: break-word;
+            margin-bottom: 1.5rem;
+            line-height: 1.5;
+            font-family: inherit;
+            font-size: 1rem; /* 保持原字号 */
+        }
+
+        .contact-info {
+            background: white;
+            padding: 1.5rem;
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow);
+            margin-bottom: 1.5rem;
+        }
+
+        .footer {
+            background-color: var(--secondary-color);
+            color: white;
+            padding: 2rem 0;
+            text-align: center;
+            margin-top: 2rem;
+        }
+
+        .footer p {
+            margin-top: 1rem;
+            color: var(--light-color);
+            font-size: 0.9rem; /* 保持原字号 */
+        }
+        
+        /* 公告内容样式 - 完全保持原样 */
+        .announcement-content {
+            background: white;
+            padding: 1.5rem;
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow);
+            line-height: 1.6;
+            margin-bottom: 1.5rem;
+        }
+        
+        .announcement-content a {
+            color: var(--accent-color);
+            font-weight: 600;
+        }
+        
+        .announcement-section {
+            margin-bottom: 2rem;
+        }
+        
+        .announcement-section h3 {
+            color: var(--primary-color);
+            border-bottom: 1px solid #eee;
+            padding-bottom: 0.5rem;
+            margin-bottom: 1rem;
+        }
+        
+        /* 段落间距 - 完全保持原样 */
+        .announcement-section p {
+            margin-bottom: 1rem;
+            font-size: 1rem; /* 保持原字号 */
+        }
+        
+        /* 列表间距 - 完全保持原样 */
+        .announcement-section ul,
+        .announcement-section ol {
+            margin-bottom: 1.5rem;
+        }
+
+        /* 图片网格布局 - 完全保持原样 */
+        .image-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 1rem;
+            margin: 1rem 0;
+        }
+
+        .image-grid img {
+            width: 100%;
+            height: auto;
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+        }
+
+        .image-grid img:hover {
+            transform: scale(1.02);
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+        }
+
+        /* 图片分组标题 - 完全保持原样 */
+        .image-group {
+            margin: 1.5rem 0;
+        }
+
+        .image-group h4 {
+            margin-bottom: 0.8rem;
+            color: var(--primary-color);
+        }
+        
+        /* 全屏查看模态框 */
+        .fullscreen-modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.95);
+            z-index: 10000;
+            display: none;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+        }
+        
+        .fullscreen-modal.active {
+            display: flex;
+        }
+        
+        .fullscreen-modal img {
+            max-width: 95%;
+            max-height: 95%;
+            object-fit: contain;
+            cursor: default;
+        }
+        
+        .close-modal {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            color: white;
+            font-size: 2rem;
+            cursor: pointer;
+            background: rgba(0, 0, 0, 0.5);
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: none;
+        }
+        
+        .close-modal:hover {
+            background: rgba(0, 0, 0, 0.7);
+        }
+        
+        /* =============== 响应式设计 - 完全保持原样 =============== */
+        
+        /* 平板设备优化 - 完全保持原样 */
+        @media (min-width: 768px) {
+            .container {
+                max-width: 720px;
+            }
+
+            .project-list {
+                display: grid;
+                grid-template-columns: repeat(2, 1fr);
+                gap: 1.5rem;
+            }
+
+            /* 平板：图片网格变为2列 */
+            .image-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        /* 桌面设备优化 - 完全保持原样 */
+        @media (min-width: 992px) {
+            .container {
+                max-width: 960px;
+            }
+
+            .project-list {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            /* 桌面：图片网格保持2列，但间隙更大 */
+            .image-grid {
+                gap: 1.5rem;
+            }
+        }
+
+        /* 大屏幕优化 - 完全保持原样 */
+        @media (min-width: 1200px) {
+            .container {
+                max-width: var(--max-content-width);
+            }
+        }
+
+        /* 深色模式支持 - 完全保持原样 */
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --text-color: #e0e0e0;
+                --light-color: #1a1a1a;
+                --shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+            }
+
+            body {
+                background-color: #121212;
+            }
+
+            .project-list li, pre, .contact-info, .announcement-content {
+                background-color: #2d2d2d;
+            }
+            
+            .announcement-section h3 {
+                border-bottom-color: #444;
+            }
+
+            /* 新增：让h1,h2,h3在深色模式下使用主色 */
+           h1,h2,h3 {
+                color: #e0e0e0;
+            }
+
+           /* 新增：修复footer p在深色模式下的颜色 */
+           .footer p {
+               color: var(--text-color);
+            }
+
+            /* 深色模式下的图片边框 */
+            .image-grid img {
+                border-color: #444;
+            }
+        }
+
+        /* 减少动画偏好 - 完全保持原样 */
+        @media (prefers-reduced-motion: reduce) {
+            * {
+                transition-duration: 0.01ms !important;
+            }
+
+            html {
+                scroll-behavior: auto;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <div class="container">
+            <div class="logo">无名剧场网页服务系统</div>
+        </div>
+    </header>
+
+    <main class="container">
+        <section class="content-section">
+            <h1>欢迎来到无名剧场网页服务系统</h1>
+
+            <h2>请选择一个要查看的项目</h2>
+            <ul class="project-list">
+                <li><a href="ranking.html">主场排名</a></li>
+                <li><a href="announcement.html">腾讯会议状态信息</a></li>
+                <li><a href="servers.html">游戏服务器信息</a></li>
+                <li><a href="activity.html">活动</a></li>
+            </ul>
+
+            <h2>公告</h2>
+            <div class="announcement-content">
+                <!-- 你可以在顶部添加提示 -->
+
+                <div class="announcement-section">
+                    <h3>最新通知</h3>
+                    <p>服务器V3.0已完成50%！</p>
+                    <p>想更快的看公告？试试<a href="无名剧场.apk">这个软件</a></p>
+                    <p>我们做出了抽象版 手机Java版启动器 ，而且解决了非正版不能玩的问题（委屈因为这而花89元钱的人，所以定价30才能拿下这个抽象版MC），具体信息请看 服务器信息-我的世界 底部“附加信息”板块。</p>
+                    <p>天际用行动告诉我们，他已经不需要我们的任何技术支持了，已批准移出主场，已移入副场！</p>
+                    <p>2026年3月15日，Him与张浱在科帝的精准任务分配下完美完成《新手计划》部分内容，已解除3月8日对Him的警告！但天际因未知原因缺席，待调查完成后给予评价。</p>
+                    <p>《新手计划》服务器已降了2次版本，多次覆写导致服务器硬盘已严重损坏！短时间已经无法再次更改任何服务器内容！场主近6周会在数据废墟里度过，无法游戏请谅解！</p>
+
+                <div class="announcement-section">
+                    <h3>重要通知</h3>
+                    <p>2025年12月8日晚上新重大事件：要不是我闲着没事清理手机垃圾我还发不现了，也不知道OPPO犯什么抽，竟然毫无征兆的下架了我的世界！</p>
+                    <p>我的小号就是OPPO渠道登录，差一点我三大重要账号之一就没了！</p>
+                    <p>由于我的资源有限，只能牺牲掉 <strong>刚来的fxtt8号</strong>（曾经vivo渠道抢救回来的，又要下地狱了……）以拯救 <strong>刚来的fxtt小号</strong>（OPPO渠道）……</p>
+                    <p>剩下的看图吧…………已经不能用语言描述了……</p>
+                    
+                    <!-- 图片网格 - 智能加载（已修改） -->
+                    <div class="image-grid">
+                        <img class="lazy-thumbnail" 
+                             src="刚来的fxtt8号陨落记录/缩略图/大型吐槽-1-缩略图.jpg" 
+                             data-src="刚来的fxtt8号陨落记录/原图/大型吐槽-1.jpg"
+                             alt="大型吐槽-1"
+                             onclick="loadOriginalImage(this)">
+                        
+                        <img class="lazy-thumbnail" 
+                             src="刚来的fxtt8号陨落记录/缩略图/大型吐槽-2-缩略图.jpg" 
+                             data-src="刚来的fxtt8号陨落记录/原图/大型吐槽-2.jpg"
+                             alt="大型吐槽-2"
+                             onclick="loadOriginalImage(this)">
+                        
+                        <img class="lazy-thumbnail" 
+                             src="刚来的fxtt8号陨落记录/缩略图/大型吐槽-3-缩略图.jpg" 
+                             data-src="刚来的fxtt8号陨落记录/原图/大型吐槽-3.jpg"
+                             alt="大型吐槽-3"
+                             onclick="loadOriginalImage(this)">
+
+                        <img class="lazy-thumbnail" 
+                             src="刚来的fxtt8号陨落记录/缩略图/占位提示图-缩略图.jpg" 
+                             data-src="刚来的fxtt8号陨落记录/原图/占位提示图.jpg"
+                             alt="占位提示图"
+                             onclick="loadOriginalImage(this)">
+                        
+                        <img class="lazy-thumbnail" 
+                             src="刚来的fxtt8号陨落记录/缩略图/大型吐槽-4-缩略图.jpg" 
+                             data-src="刚来的fxtt8号陨落记录/原图/大型吐槽-4.jpg"
+                             alt="大型吐槽-4"
+                             onclick="loadOriginalImage(this)">
+                        
+                        <img class="lazy-thumbnail" 
+                             src="刚来的fxtt8号陨落记录/缩略图/大型吐槽-5-缩略图.jpg" 
+                             data-src="刚来的fxtt8号陨落记录/原图/大型吐槽-5.jpg"
+                             alt="大型吐槽-5"
+                             onclick="loadOriginalImage(this)">
+                    </div>
+                    
+                    <div class="image-group">
+                        <h4>最后留念</h4>
+                        <div class="image-grid">
+                            <img class="lazy-thumbnail" 
+                                 src="刚来的fxtt8号陨落记录/缩略图/最后留念-1-缩略图.jpg" 
+                                 data-src="刚来的fxtt8号陨落记录/原图/最后留念-1.jpg"
+                                 alt="最后留念-1"
+                                 onclick="loadOriginalImage(this)">
+                            
+                            <img class="lazy-thumbnail" 
+                                 src="刚来的fxtt8号陨落记录/缩略图/最后留念-2-缩略图.jpg" 
+                                 data-src="刚来的fxtt8号陨落记录/原图/最后留念-2.jpg"
+                                 alt="最后留念-2"
+                                 onclick="loadOriginalImage(this)">
+                            
+                            <img class="lazy-thumbnail" 
+                                 src="刚来的fxtt8号陨落记录/缩略图/最后留念-3-缩略图.jpg" 
+                                 data-src="刚来的fxtt8号陨落记录/原图/最后留念-3.jpg"
+                                 alt="最后留念-3"
+                                 onclick="loadOriginalImage(this)">
+                        </div>
+                    </div>
+                    
+                    <div class="image-group">
+                        <h4>覆盖过程</h4>
+                        <div class="image-grid">
+                            <img class="lazy-thumbnail" 
+                                 src="刚来的fxtt8号陨落记录/缩略图/覆盖过程-1-缩略图.jpg" 
+                                 data-src="刚来的fxtt8号陨落记录/原图/覆盖过程-1.jpg"
+                                 alt="覆盖过程-1"
+                                 onclick="loadOriginalImage(this)">
+                            
+                            <img class="lazy-thumbnail" 
+                                 src="刚来的fxtt8号陨落记录/缩略图/覆盖过程-2-缩略图.jpg" 
+                                 data-src="刚来的fxtt8号陨落记录/原图/覆盖过程-2.jpg"
+                                 alt="覆盖过程-2"
+                                 onclick="loadOriginalImage(this)">
+                            
+                            <img class="lazy-thumbnail" 
+                                 src="刚来的fxtt8号陨落记录/缩略图/覆盖过程-3-缩略图.jpg" 
+                                 data-src="刚来的fxtt8号陨落记录/原图/覆盖过程-3.jpg"
+                                 alt="覆盖过程-3"
+                                 onclick="loadOriginalImage(this)">
+                        </div>
+                    </div>
+                    
+                    <div class="image-group">
+                        <h4>覆盖后</h4>
+                        <div class="image-grid">
+                            <img class="lazy-thumbnail" 
+                                 src="刚来的fxtt8号陨落记录/缩略图/覆盖后-1-缩略图.jpg" 
+                                 data-src="刚来的fxtt8号陨落记录/原图/覆盖后-1.jpg"
+                                 alt="覆盖后-1"
+                                 onclick="loadOriginalImage(this)">
+                            
+                            <img class="lazy-thumbnail" 
+                                 src="刚来的fxtt8号陨落记录/缩略图/覆盖后-2-缩略图.jpg" 
+                                 data-src="刚来的fxtt8号陨落记录/原图/覆盖后-2.jpg"
+                                 alt="覆盖后-2"
+                                 onclick="loadOriginalImage(this)">
+                        </div>
+                    </div>
+                    
+                    <div class="image-group">
+                        <h4>新停服通知</h4>
+                        <img class="lazy-thumbnail" 
+                             src="刚来的fxtt8号陨落记录/缩略图/新停服通知-缩略图.jpg" 
+                             data-src="刚来的fxtt8号陨落记录/原图/新停服通知.jpg"
+                             alt="新停服通知"
+                             style="max-width: 100%; cursor: pointer;"
+                             onclick="loadOriginalImage(this)">
+                    </div>
+                    
+                    <h4>最后，纪念 <strong>刚来的fxtt8号</strong>  ！</h4>
+                    
+                    <p>2025年9月11日晚上重大事件：收到阳谋提醒，网易我的世界将关闭 vivo、华为、百度 渠道服务器，阳谋因此退游玩了6年的我的世界……</p>
+                    <p>阳谋账号最后永别，最后的信息：</p>
+                    <ul>
+                        <li>昵称：</li>
+                        <li>等级：46/50（基岩Ⅱ）</li>
+                        <li>钻石：具体数目未知，但已过千，全部放弃</li>
+                        <li>组件（包括付费及绝版）：全部放弃</li>
+                    </ul>
+                    <p>总之……在10月*日后全部永别……</p>
+                    
+                    <p>在收到通知之后，科帝筹备大量资源以尝试保留游戏数据，最终成功保留 <strong>刚来的fxtt8号</strong>（vivo渠道）全部数据，并在2025年9月11日22时40分宣告 <strong>刚来的fxtt5号</strong>（vivo渠道）与 <strong>刚来的fxtt6号</strong>（vivo渠道）与我们永别，这将成为历史的一刻。且 <strong>刚来的fxtt</strong>（华为渠道）数据转移成功！</p>
+                    
+                    <p>无奖竞猜：大家猜猜 <strong>刚来的fxtt7号</strong>（九游渠道）能留下来吗？</p>
+                </div>
+                
+                <div class="announcement-section">
+                    <h3>团队动态</h3>
+                    <p>由于 <strong>Minecraft-网易-1号小队</strong> 主机缺席，所以该小队已于2025年9月12日解散！</p>
+                    
+                    <p>2024年4月12日狗墨给予303作弊版泰拉瑞亚，现在已经刑满放行！</p>
+                </div>
+                
+                <div class="announcement-section">
+                    <h3>文件分享</h3>
+                    <p>科帝的分享文件：</p>
+                    
+                    <p>文件链接：<a href="https://www.alipan.com/s/AH6syytNQCv">https://www.alipan.com/s/AH6syytNQCv</a></p>
+                    
+                    <p>提取码: （请从场主那里获取）</p>
+                    
+                    <p>点击链接浏览器在线 查看/保存 文件；或者复制本段内容，打开「阿里云盘」APP ，无需下载极速在线查看，视频原画倍速播放。</p>
+                    
+                    <p>注：链接有时会变，请留意公告！</p>
+                </div>
+                
+                <div class="announcement-section">
+                    <h3>技术通知</h3>
+                    <p>2025年6月6日讯息，场主的iPad版Java我的世界暂时已无法使用，因为最近P12证书紧缺！</p>
+                    <p>2025年12月13日讯息，场主的iPad版Java我的世界已可正常使用，因为获取了新P12证书！</p>
+                    <p>2026年2月28日讯息，场主的iPad版Java我的世界暂时已无法使用，因为懒得修，新手机不香吗！</p>
+                </div>
+                
+            </div>
+
+            <h2>场主的联系方式（序号代表优先度）</h2>
+                <h3><pre>
+1、电话拨打：15712376811
+2、微信联系(微信号)：fxtt122
+3、QQ联系(QQ号)：2076976616
+4、电子邮箱：2076976616@qq.com
+5、腾信会议(会议号)：3214159647</pre></h3>
+
+            <p><a href="oi.html">oi~</a></p>
+        </section>
+    </main>
+
+    <!-- 全屏查看模态框 -->
+    <div id="fullscreenModal" class="fullscreen-modal" onclick="closeFullscreen()">
+        <button class="close-modal" onclick="closeFullscreen()">&times;</button>
+        <img id="fullscreenImg" src="" alt="全屏查看" onclick="event.stopPropagation()">
+    </div>
+
+    <footer class="footer">
+        <div class="container">
+            <p>无名剧场网页服务系统</p>
+            <p>© 2025 追光系列. 保留所有权利.</p>
+        </div>
+    </footer>
+
+    <script>
+        // ===== 智能图片加载系统 =====
+        // 点击缩略图加载并显示原图
+        function loadOriginalImage(thumbElement) {
+            const originalSrc = thumbElement.getAttribute('data-src');
+            const fullscreenImg = document.getElementById('fullscreenImg');
+            const modal = document.getElementById('fullscreenModal');
+            
+            // 1. 立即显示全屏框，先展示缩略图（即时反馈）
+            fullscreenImg.src = thumbElement.src;
+            fullscreenImg.alt = thumbElement.alt;
+            modal.classList.add('active');
+            document.body.style.overflow = 'hidden';
+            
+            // 2. 异步加载高清原图
+            const originalImage = new Image();
+            originalImage.onload = function() {
+                // 原图加载完成后，替换全屏显示的图片
+                fullscreenImg.src = originalSrc;
+            };
+            originalImage.onerror = function() {
+                console.error('原图加载失败:', originalSrc);
+                // 可以保持显示缩略图，或给用户一个提示
+            };
+            originalImage.src = originalSrc; // 开始加载
+        }
+
+        // 关闭全屏查看器
+        function closeFullscreen() {
+            const modal = document.getElementById('fullscreenModal');
+            modal.classList.remove('active');
+            document.body.style.overflow = '';
+        }
+
+        // ESC键关闭全屏
+        document.addEventListener('keydown', function(event) {
+            if (event.key === 'Escape') {
+                closeFullscreen();
+            }
+        });
+
+        // 点击模态框背景或关闭按钮时关闭
+        document.getElementById('fullscreenModal').addEventListener('click', function(e) {
+            if (e.target === this || e.target.classList.contains('close-modal')) {
+                closeFullscreen();
+            }
+        });
+    </script>
+</body>
+</html>

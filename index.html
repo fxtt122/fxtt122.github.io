@@ -3,26 +3,18 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>无名剧场网页服务系统</title>
-<link rel="icon" type="image/png" href="favicon/favicon-96x96.png" sizes="96x96" />
-<link rel="icon" type="image/svg+xml" href="favicon/favicon.svg" />
-<link rel="shortcut icon" href="favicon/favicon.ico" />
-<link rel="apple-touch-icon" sizes="180x180" href="favicon/apple-touch-icon.png" />
-<link rel="manifest" href="favicon/site.webmanifest" />
+    <title>服务器维护中 - Minecraft V3.0</title>
     <style>
-        /* 基础重置和变量 - 完全保持原样 */
         :root {
-            --primary-color: #3498db;
-            --secondary-color: #2c3e50;
-            --accent-color: #e74c3c;
-            --light-color: #ecf0f1;
-            --dark-color: #2c3e50;
-            --text-color: #333;
-            --text-light: #7f8c8d;
-            --shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-            --border-radius: 8px;
-            --transition: all 0.3s ease;
-            --max-content-width: 1200px;
+            --bg: #0f172a;
+            --card-bg: #1e293b;
+            --text: #e2e8f0;
+            --text-secondary: #94a3b8;
+            --accent: #6366f1;
+            --accent-glow: #818cf8;
+            --border: #334155;
+            --input-bg: #0f172a;
+            --link: #a5b4fc;
         }
 
         * {
@@ -31,630 +23,539 @@
             box-sizing: border-box;
         }
 
-        html {
-            scroll-behavior: smooth;
-        }
-
         body {
-            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
-            line-height: 1.7;
-            color: var(--text-color);
-            background-color: #f9f9f9;
+            font-family: 'Segoe UI', 'PingFang SC', 'Microsoft YaHei', 'Helvetica Neue', sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
             overflow-x: hidden;
+            position: relative;
+            padding: 20px 0;
         }
 
-        /* 容器系统 - 完全保持原样 */
-        .container {
+        /* 动态网格背景 */
+        .bg-grid {
+            position: fixed;
+            inset: 0;
+            pointer-events: none;
+            z-index: 0;
+            opacity: 0.06;
+            background-image:
+                linear-gradient(rgba(255, 255, 255, 0.8) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(255, 255, 255, 0.8) 1px, transparent 1px);
+            background-size: 60px 60px;
+            animation: gridShift 20s linear infinite;
+        }
+
+        @keyframes gridShift {
+            0% {
+                background-position: 0 0, 0 0;
+            }
+            100% {
+                background-position: 60px 60px, 60px 60px;
+            }
+        }
+
+        /* 浮动光斑 */
+        .orb {
+            position: fixed;
+            border-radius: 50%;
+            filter: blur(120px);
+            pointer-events: none;
+            z-index: 0;
+            animation-timing-function: ease-in-out;
+            animation-iteration-count: infinite;
+        }
+        .orb-1 {
+            width: 400px;
+            height: 400px;
+            background: rgba(99, 102, 241, 0.13);
+            top: -10%;
+            left: -5%;
+            animation: floatOrb1 14s infinite;
+        }
+        .orb-2 {
+            width: 350px;
+            height: 350px;
+            background: rgba(139, 92, 246, 0.10);
+            bottom: -12%;
+            right: -8%;
+            animation: floatOrb2 18s infinite;
+        }
+        .orb-3 {
+            width: 260px;
+            height: 260px;
+            background: rgba(59, 130, 246, 0.09);
+            top: 40%;
+            left: 55%;
+            animation: floatOrb3 16s infinite;
+        }
+
+        @keyframes floatOrb1 {
+            0%,
+            100% {
+                transform: translate(0, 0) scale(1);
+            }
+            25% {
+                transform: translate(60px, 80px) scale(1.15);
+            }
+            50% {
+                transform: translate(-20px, 30px) scale(0.9);
+            }
+            75% {
+                transform: translate(-50px, -40px) scale(1.1);
+            }
+        }
+        @keyframes floatOrb2 {
+            0%,
+            100% {
+                transform: translate(0, 0) scale(1);
+            }
+            33% {
+                transform: translate(-70px, -50px) scale(1.2);
+            }
+            66% {
+                transform: translate(40px, 30px) scale(0.85);
+            }
+        }
+        @keyframes floatOrb3 {
+            0%,
+            100% {
+                transform: translate(0, 0) scale(1);
+            }
+            50% {
+                transform: translate(-40px, -60px) scale(1.25);
+            }
+        }
+
+        /* 主容器 */
+        .main-container {
+            position: relative;
+            z-index: 1;
             width: 100%;
-            padding: 0 5vw;
+            max-width: 620px;
+            padding: 20px;
             margin: 0 auto;
+            display: flex;
+            flex-direction: column;
+            gap: 24px;
         }
 
-        /* 移动设备优先的布局 - 完全保持原样 */
-        .header {
-            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
-            color: white;
-            padding: 1.5rem 0;
-            box-shadow: var(--shadow);
-        }
-
-        .logo {
-            font-size: 1.8rem; /* 保持原字号 */
-            font-weight: 700;
+        .card {
+            background: var(--card-bg);
+            border: 1px solid var(--border);
+            border-radius: 24px;
+            padding: 48px 40px;
             text-align: center;
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            box-shadow:
+                0 25px 60px rgba(0, 0, 0, 0.5),
+                0 0 0 1px rgba(255, 255, 255, 0.03) inset,
+                0 1px 0 rgba(255, 255, 255, 0.04) inset;
+            transition: box-shadow 0.4s ease;
+        }
+        .card:hover {
+            box-shadow:
+                0 30px 70px rgba(0, 0, 0, 0.6),
+                0 0 0 1px rgba(255, 255, 255, 0.05) inset,
+                0 0 40px rgba(99, 102, 241, 0.08);
         }
 
-        .content-section {
-            padding: 2rem 0;
+        /* 通知卡片特殊样式 */
+        .card-notice {
+            text-align: left;
+            padding: 36px 40px;
         }
-
-        /* 标题字号和样式 - 完全保持原样 */
-        h1 {
-            text-align: center;
-            margin-bottom: 1.5rem;
-            color: var(--secondary-color);
-            font-size: 2rem; /* 保持原字号 */
+        .card-notice .notice-header {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 24px;
+            padding-bottom: 16px;
+            border-bottom: 1px solid var(--border);
         }
-
-        h2 {
-            margin: 1.5rem 0 1rem;
-            color: var(--secondary-color);
-            border-bottom: 2px solid var(--primary-color);
-            padding-bottom: 0.5rem;
-            font-size: 1.5rem; /* 保持原字号 */
+        .card-notice .notice-dot {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background: #22c55e;
+            animation: pulseDot 2s ease-in-out infinite;
+            flex-shrink: 0;
         }
-
-        h3 {
-            margin: 1.2rem 0 0.8rem;
-            color: var(--secondary-color);
-            font-size: 1.3rem; /* 保持原字号 */
+        @keyframes pulseDot {
+            0%,
+            100% {
+                box-shadow: 0 0 0 0 rgba(34, 197, 94, 0.5);
+            }
+            50% {
+                box-shadow: 0 0 0 10px rgba(34, 197, 94, 0);
+            }
         }
-
-        h4 {
-            margin: 1rem 0 0.5rem;
-            color: var(--accent-color);
-            font-size: 1.1rem; /* 保持原字号 */
+        .card-notice h3 {
+            font-size: 1.15rem;
+            font-weight: 600;
+            color: var(--text);
+            margin: 0;
+            letter-spacing: -0.01em;
         }
-
-        /* 列表样式 - 完全保持原样 */
-        ul {
-            padding-left: 1.5rem;
-            margin-bottom: 1.5rem;
+        .card-notice .notice-list {
+            list-style: none;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            gap: 14px;
         }
-
-        li {
-            margin-bottom: 0.5rem;
+        .card-notice .notice-list li {
+            position: relative;
+            padding-left: 20px;
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+            line-height: 1.65;
         }
-
-        /* 链接样式 - 完全保持原样 */
-        a {
-            color: var(--primary-color);
+        .card-notice .notice-list li::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 8px;
+            width: 6px;
+            height: 6px;
+            border-radius: 50%;
+            background: var(--border);
+        }
+        .card-notice .notice-list li a {
+            color: var(--link);
             text-decoration: none;
-            transition: var(--transition);
+            font-weight: 500;
+            transition: color 0.2s ease;
         }
-
-        a:hover {
-            color: var(--accent-color);
+        .card-notice .notice-list li a:hover {
+            color: #c7d2fe;
             text-decoration: underline;
         }
 
-        .project-list {
-            list-style-type: none;
-            padding-left: 0;
-        }
-
-        .project-list li {
-            margin-bottom: 1rem;
-            padding: 1rem;
-            background: white;
-            border-radius: var(--border-radius);
-            box-shadow: var(--shadow);
-            transition: var(--transition);
-        }
-
-        .project-list li:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
-        }
-
-        .project-list a {
-            font-size: 1.2rem; /* 保持原字号 */
-            font-weight: 600;
-            display: block;
-        }
-
-        pre {
-            background: white;
-            padding: 1.5rem;
-            border-radius: var(--border-radius);
-            box-shadow: var(--shadow);
-            overflow-x: auto;
-            white-space: pre-wrap;
-            word-wrap: break-word;
-            margin-bottom: 1.5rem;
-            line-height: 1.5;
-            font-family: inherit;
-            font-size: 1rem; /* 保持原字号 */
-        }
-
-        .contact-info {
-            background: white;
-            padding: 1.5rem;
-            border-radius: var(--border-radius);
-            box-shadow: var(--shadow);
-            margin-bottom: 1.5rem;
-        }
-
-        .footer {
-            background-color: var(--secondary-color);
-            color: white;
-            padding: 2rem 0;
-            text-align: center;
-            margin-top: 2rem;
-        }
-
-        .footer p {
-            margin-top: 1rem;
-            color: var(--light-color);
-            font-size: 0.9rem; /* 保持原字号 */
-        }
-        
-        /* 公告内容样式 - 完全保持原样 */
-        .announcement-content {
-            background: white;
-            padding: 1.5rem;
-            border-radius: var(--border-radius);
-            box-shadow: var(--shadow);
-            line-height: 1.6;
-            margin-bottom: 1.5rem;
-        }
-        
-        .announcement-content a {
-            color: var(--accent-color);
-            font-weight: 600;
-        }
-        
-        .announcement-section {
-            margin-bottom: 2rem;
-        }
-        
-        .announcement-section h3 {
-            color: var(--primary-color);
-            border-bottom: 1px solid #eee;
-            padding-bottom: 0.5rem;
-            margin-bottom: 1rem;
-        }
-        
-        /* 段落间距 - 完全保持原样 */
-        .announcement-section p {
-            margin-bottom: 1rem;
-            font-size: 1rem; /* 保持原字号 */
-        }
-        
-        /* 列表间距 - 完全保持原样 */
-        .announcement-section ul,
-        .announcement-section ol {
-            margin-bottom: 1.5rem;
-        }
-
-        /* 图片网格布局 - 完全保持原样 */
-        .image-grid {
-            display: grid;
-            grid-template-columns: 1fr;
-            gap: 1rem;
-            margin: 1rem 0;
-        }
-
-        .image-grid img {
-            width: 100%;
-            height: auto;
-            border-radius: var(--border-radius);
-            box-shadow: var(--shadow);
-            transition: var(--transition);
-        }
-
-        .image-grid img:hover {
-            transform: scale(1.02);
-            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
-        }
-
-        /* 图片分组标题 - 完全保持原样 */
-        .image-group {
-            margin: 1.5rem 0;
-        }
-
-        .image-group h4 {
-            margin-bottom: 0.8rem;
-            color: var(--primary-color);
-        }
-        
-        /* 全屏查看模态框 */
-        .fullscreen-modal {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0, 0, 0, 0.95);
-            z-index: 10000;
-            display: none;
-            justify-content: center;
+        /* 图标区域 */
+        .icon-wrapper {
+            display: inline-flex;
             align-items: center;
-            cursor: pointer;
-        }
-        
-        .fullscreen-modal.active {
-            display: flex;
-        }
-        
-        .fullscreen-modal img {
-            max-width: 95%;
-            max-height: 95%;
-            object-fit: contain;
-            cursor: default;
-        }
-        
-        .close-modal {
-            position: absolute;
-            top: 20px;
-            right: 20px;
-            color: white;
-            font-size: 2rem;
-            cursor: pointer;
-            background: rgba(0, 0, 0, 0.5);
-            width: 50px;
-            height: 50px;
+            justify-content: center;
+            width: 90px;
+            height: 90px;
             border-radius: 50%;
+            background: rgba(99, 102, 241, 0.12);
+            margin-bottom: 28px;
+            position: relative;
+        }
+        .icon-wrapper::after {
+            content: '';
+            position: absolute;
+            inset: -6px;
+            border-radius: 50%;
+            border: 2px solid transparent;
+            border-top-color: var(--accent-glow);
+            animation: spinRing 3s linear infinite;
+        }
+        @keyframes spinRing {
+            to {
+                transform: rotate(360deg);
+            }
+        }
+
+        .gear-icon {
+            width: 44px;
+            height: 44px;
+            animation: pulseGear 2.5s ease-in-out infinite;
+            color: var(--accent-glow);
+        }
+        @keyframes pulseGear {
+            0%,
+            100% {
+                transform: scale(1);
+                opacity: 0.85;
+            }
+            50% {
+                transform: scale(1.12);
+                opacity: 1;
+            }
+        }
+
+        /* 标题 */
+        h1 {
+            font-size: 2rem;
+            font-weight: 700;
+            letter-spacing: -0.02em;
+            margin-bottom: 10px;
+            background: linear-gradient(135deg, #e2e8f0 0%, #c4b5fd 40%, #a5b4fc 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .subtitle {
+            color: var(--text-secondary);
+            font-size: 1.05rem;
+            line-height: 1.7;
+            margin-bottom: 32px;
+        }
+        .subtitle-small {
+            font-size: 0.82rem;
+            color: #64748b;
+            line-height: 1.6;
+            margin-top: 20px;
+            margin-bottom: 0;
+        }
+
+        /* 倒计时 */
+        .countdown {
             display: flex;
-            align-items: center;
             justify-content: center;
-            border: none;
+            gap: 16px;
+            margin-bottom: 36px;
+            flex-wrap: wrap;
         }
-        
-        .close-modal:hover {
-            background: rgba(0, 0, 0, 0.7);
+        .countdown-item {
+            background: var(--input-bg);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            padding: 16px 12px;
+            min-width: 70px;
+            text-align: center;
+            transition: all 0.3s ease;
         }
-        
-        /* =============== 响应式设计 - 完全保持原样 =============== */
-        
-        /* 平板设备优化 - 完全保持原样 */
-        @media (min-width: 768px) {
-            .container {
-                max-width: 720px;
-            }
-
-            .project-list {
-                display: grid;
-                grid-template-columns: repeat(2, 1fr);
-                gap: 1.5rem;
-            }
-
-            /* 平板：图片网格变为2列 */
-            .image-grid {
-                grid-template-columns: repeat(2, 1fr);
-            }
+        .countdown-item .number {
+            font-size: 2.2rem;
+            font-weight: 700;
+            font-variant-numeric: tabular-nums;
+            font-family: 'SF Mono', 'JetBrains Mono', 'Consolas', 'PingFang SC', monospace;
+            color: #e2e8f0;
+            line-height: 1;
+            letter-spacing: -0.02em;
         }
-
-        /* 桌面设备优化 - 完全保持原样 */
-        @media (min-width: 992px) {
-            .container {
-                max-width: 960px;
-            }
-
-            .project-list {
-                grid-template-columns: repeat(2, 1fr);
-            }
-
-            /* 桌面：图片网格保持2列，但间隙更大 */
-            .image-grid {
-                gap: 1.5rem;
-            }
+        .countdown-item .label {
+            font-size: 0.78rem;
+            color: var(--text-secondary);
+            margin-top: 6px;
+            text-transform: uppercase;
+            letter-spacing: 0.06em;
         }
 
-        /* 大屏幕优化 - 完全保持原样 */
-        @media (min-width: 1200px) {
-            .container {
-                max-width: var(--max-content-width);
+        /* 进度条 */
+        .progress-wrap {
+            margin-bottom: 8px;
+        }
+        .progress-bar {
+            width: 100%;
+            height: 6px;
+            background: var(--input-bg);
+            border-radius: 99px;
+            overflow: hidden;
+            border: 1px solid var(--border);
+        }
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #6366f1, #818cf8, #a78bfa);
+            border-radius: 99px;
+            width: 0%;
+            transition: width 1s ease;
+            animation: shimmer 2s infinite;
+            background-size: 200% 100%;
+        }
+        @keyframes shimmer {
+            0% {
+                background-position: 200% 0;
+            }
+            100% {
+                background-position: -200% 0;
             }
         }
-
-        /* 深色模式支持 - 完全保持原样 */
-        @media (prefers-color-scheme: dark) {
-            :root {
-                --text-color: #e0e0e0;
-                --light-color: #1a1a1a;
-                --shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
-            }
-
-            body {
-                background-color: #121212;
-            }
-
-            .project-list li, pre, .contact-info, .announcement-content {
-                background-color: #2d2d2d;
-            }
-            
-            .announcement-section h3 {
-                border-bottom-color: #444;
-            }
-
-            /* 新增：让h1,h2,h3在深色模式下使用主色 */
-           h1,h2,h3 {
-                color: #e0e0e0;
-            }
-
-           /* 新增：修复footer p在深色模式下的颜色 */
-           .footer p {
-               color: var(--text-color);
-            }
-
-            /* 深色模式下的图片边框 */
-            .image-grid img {
-                border-color: #444;
-            }
+        .progress-text {
+            font-size: 0.8rem;
+            color: var(--text-secondary);
+            margin-top: 8px;
+            text-align: right;
         }
 
-        /* 减少动画偏好 - 完全保持原样 */
-        @media (prefers-reduced-motion: reduce) {
-            * {
-                transition-duration: 0.01ms !important;
+        /* 响应式 */
+        @media (max-width: 600px) {
+            .card {
+                padding: 32px 20px;
+                border-radius: 18px;
             }
-
-            html {
-                scroll-behavior: auto;
+            .card-notice {
+                padding: 28px 20px;
+            }
+            h1 {
+                font-size: 1.5rem;
+            }
+            .subtitle {
+                font-size: 0.95rem;
+            }
+            .countdown {
+                gap: 8px;
+            }
+            .countdown-item {
+                min-width: 55px;
+                padding: 12px 8px;
+                border-radius: 12px;
+            }
+            .countdown-item .number {
+                font-size: 1.5rem;
+            }
+            .icon-wrapper {
+                width: 68px;
+                height: 68px;
+            }
+            .gear-icon {
+                width: 34px;
+                height: 34px;
+            }
+            .main-container {
+                gap: 16px;
+            }
+            .card-notice .notice-list li {
+                font-size: 0.85rem;
             }
         }
     </style>
 </head>
 <body>
-    <header class="header">
-        <div class="container">
-            <div class="logo">无名剧场网页服务系统</div>
-        </div>
-    </header>
 
-    <main class="container">
-        <section class="content-section">
-            <h1>欢迎来到无名剧场网页服务系统</h1>
+    <!-- 背景装饰 -->
+    <div class="bg-grid"></div>
+    <div class="orb orb-1"></div>
+    <div class="orb orb-2"></div>
+    <div class="orb orb-3"></div>
 
-            <h2>请选择一个要查看的项目</h2>
-            <ul class="project-list">
-                <li><a href="ranking.html">主场排名</a></li>
-                <li><a href="announcement.html">腾讯会议状态信息</a></li>
-                <li><a href="servers.html">游戏服务器信息</a></li>
-                <li><a href="activity.html">活动</a></li>
-            </ul>
+    <!-- 主体 -->
+    <main class="main-container">
 
-            <h2>公告</h2>
-            <div class="announcement-content">
-                <!-- 你可以在顶部添加提示 -->
-
-                <div class="announcement-section">
-                    <h3>最新通知</h3>
-                    <p>服务器V3.0已完成50%！</p>
-                    <p>想更快的看公告？试试<a href="无名剧场.apk">这个软件</a></p>
-                    <p>我们做出了抽象版 手机Java版启动器 ，而且解决了非正版不能玩的问题（委屈因为这而花89元钱的人，所以定价30才能拿下这个抽象版MC），具体信息请看 服务器信息-我的世界 底部“附加信息”板块。</p>
-                    <p>天际用行动告诉我们，他已经不需要我们的任何技术支持了，已批准移出主场，已移入副场！</p>
-                    <p>2026年3月15日，Him与张浱在科帝的精准任务分配下完美完成《新手计划》部分内容，已解除3月8日对Him的警告！但天际因未知原因缺席，待调查完成后给予评价。</p>
-                    <p>《新手计划》服务器已降了2次版本，多次覆写导致服务器硬盘已严重损坏！短时间已经无法再次更改任何服务器内容！场主近6周会在数据废墟里度过，无法游戏请谅解！</p>
-
-                <div class="announcement-section">
-                    <h3>重要通知</h3>
-                    <p>2025年12月8日晚上新重大事件：要不是我闲着没事清理手机垃圾我还发不现了，也不知道OPPO犯什么抽，竟然毫无征兆的下架了我的世界！</p>
-                    <p>我的小号就是OPPO渠道登录，差一点我三大重要账号之一就没了！</p>
-                    <p>由于我的资源有限，只能牺牲掉 <strong>刚来的fxtt8号</strong>（曾经vivo渠道抢救回来的，又要下地狱了……）以拯救 <strong>刚来的fxtt小号</strong>（OPPO渠道）……</p>
-                    <p>剩下的看图吧…………已经不能用语言描述了……</p>
-                    
-                    <!-- 图片网格 - 智能加载（已修改） -->
-                    <div class="image-grid">
-                        <img class="lazy-thumbnail" 
-                             src="刚来的fxtt8号陨落记录/缩略图/大型吐槽-1-缩略图.jpg" 
-                             data-src="刚来的fxtt8号陨落记录/原图/大型吐槽-1.jpg"
-                             alt="大型吐槽-1"
-                             onclick="loadOriginalImage(this)">
-                        
-                        <img class="lazy-thumbnail" 
-                             src="刚来的fxtt8号陨落记录/缩略图/大型吐槽-2-缩略图.jpg" 
-                             data-src="刚来的fxtt8号陨落记录/原图/大型吐槽-2.jpg"
-                             alt="大型吐槽-2"
-                             onclick="loadOriginalImage(this)">
-                        
-                        <img class="lazy-thumbnail" 
-                             src="刚来的fxtt8号陨落记录/缩略图/大型吐槽-3-缩略图.jpg" 
-                             data-src="刚来的fxtt8号陨落记录/原图/大型吐槽-3.jpg"
-                             alt="大型吐槽-3"
-                             onclick="loadOriginalImage(this)">
-
-                        <img class="lazy-thumbnail" 
-                             src="刚来的fxtt8号陨落记录/缩略图/占位提示图-缩略图.jpg" 
-                             data-src="刚来的fxtt8号陨落记录/原图/占位提示图.jpg"
-                             alt="占位提示图"
-                             onclick="loadOriginalImage(this)">
-                        
-                        <img class="lazy-thumbnail" 
-                             src="刚来的fxtt8号陨落记录/缩略图/大型吐槽-4-缩略图.jpg" 
-                             data-src="刚来的fxtt8号陨落记录/原图/大型吐槽-4.jpg"
-                             alt="大型吐槽-4"
-                             onclick="loadOriginalImage(this)">
-                        
-                        <img class="lazy-thumbnail" 
-                             src="刚来的fxtt8号陨落记录/缩略图/大型吐槽-5-缩略图.jpg" 
-                             data-src="刚来的fxtt8号陨落记录/原图/大型吐槽-5.jpg"
-                             alt="大型吐槽-5"
-                             onclick="loadOriginalImage(this)">
-                    </div>
-                    
-                    <div class="image-group">
-                        <h4>最后留念</h4>
-                        <div class="image-grid">
-                            <img class="lazy-thumbnail" 
-                                 src="刚来的fxtt8号陨落记录/缩略图/最后留念-1-缩略图.jpg" 
-                                 data-src="刚来的fxtt8号陨落记录/原图/最后留念-1.jpg"
-                                 alt="最后留念-1"
-                                 onclick="loadOriginalImage(this)">
-                            
-                            <img class="lazy-thumbnail" 
-                                 src="刚来的fxtt8号陨落记录/缩略图/最后留念-2-缩略图.jpg" 
-                                 data-src="刚来的fxtt8号陨落记录/原图/最后留念-2.jpg"
-                                 alt="最后留念-2"
-                                 onclick="loadOriginalImage(this)">
-                            
-                            <img class="lazy-thumbnail" 
-                                 src="刚来的fxtt8号陨落记录/缩略图/最后留念-3-缩略图.jpg" 
-                                 data-src="刚来的fxtt8号陨落记录/原图/最后留念-3.jpg"
-                                 alt="最后留念-3"
-                                 onclick="loadOriginalImage(this)">
-                        </div>
-                    </div>
-                    
-                    <div class="image-group">
-                        <h4>覆盖过程</h4>
-                        <div class="image-grid">
-                            <img class="lazy-thumbnail" 
-                                 src="刚来的fxtt8号陨落记录/缩略图/覆盖过程-1-缩略图.jpg" 
-                                 data-src="刚来的fxtt8号陨落记录/原图/覆盖过程-1.jpg"
-                                 alt="覆盖过程-1"
-                                 onclick="loadOriginalImage(this)">
-                            
-                            <img class="lazy-thumbnail" 
-                                 src="刚来的fxtt8号陨落记录/缩略图/覆盖过程-2-缩略图.jpg" 
-                                 data-src="刚来的fxtt8号陨落记录/原图/覆盖过程-2.jpg"
-                                 alt="覆盖过程-2"
-                                 onclick="loadOriginalImage(this)">
-                            
-                            <img class="lazy-thumbnail" 
-                                 src="刚来的fxtt8号陨落记录/缩略图/覆盖过程-3-缩略图.jpg" 
-                                 data-src="刚来的fxtt8号陨落记录/原图/覆盖过程-3.jpg"
-                                 alt="覆盖过程-3"
-                                 onclick="loadOriginalImage(this)">
-                        </div>
-                    </div>
-                    
-                    <div class="image-group">
-                        <h4>覆盖后</h4>
-                        <div class="image-grid">
-                            <img class="lazy-thumbnail" 
-                                 src="刚来的fxtt8号陨落记录/缩略图/覆盖后-1-缩略图.jpg" 
-                                 data-src="刚来的fxtt8号陨落记录/原图/覆盖后-1.jpg"
-                                 alt="覆盖后-1"
-                                 onclick="loadOriginalImage(this)">
-                            
-                            <img class="lazy-thumbnail" 
-                                 src="刚来的fxtt8号陨落记录/缩略图/覆盖后-2-缩略图.jpg" 
-                                 data-src="刚来的fxtt8号陨落记录/原图/覆盖后-2.jpg"
-                                 alt="覆盖后-2"
-                                 onclick="loadOriginalImage(this)">
-                        </div>
-                    </div>
-                    
-                    <div class="image-group">
-                        <h4>新停服通知</h4>
-                        <img class="lazy-thumbnail" 
-                             src="刚来的fxtt8号陨落记录/缩略图/新停服通知-缩略图.jpg" 
-                             data-src="刚来的fxtt8号陨落记录/原图/新停服通知.jpg"
-                             alt="新停服通知"
-                             style="max-width: 100%; cursor: pointer;"
-                             onclick="loadOriginalImage(this)">
-                    </div>
-                    
-                    <h4>最后，纪念 <strong>刚来的fxtt8号</strong>  ！</h4>
-                    
-                    <p>2025年9月11日晚上重大事件：收到阳谋提醒，网易我的世界将关闭 vivo、华为、百度 渠道服务器，阳谋因此退游玩了6年的我的世界……</p>
-                    <p>阳谋账号最后永别，最后的信息：</p>
-                    <ul>
-                        <li>昵称：</li>
-                        <li>等级：46/50（基岩Ⅱ）</li>
-                        <li>钻石：具体数目未知，但已过千，全部放弃</li>
-                        <li>组件（包括付费及绝版）：全部放弃</li>
-                    </ul>
-                    <p>总之……在10月*日后全部永别……</p>
-                    
-                    <p>在收到通知之后，科帝筹备大量资源以尝试保留游戏数据，最终成功保留 <strong>刚来的fxtt8号</strong>（vivo渠道）全部数据，并在2025年9月11日22时40分宣告 <strong>刚来的fxtt5号</strong>（vivo渠道）与 <strong>刚来的fxtt6号</strong>（vivo渠道）与我们永别，这将成为历史的一刻。且 <strong>刚来的fxtt</strong>（华为渠道）数据转移成功！</p>
-                    
-                    <p>无奖竞猜：大家猜猜 <strong>刚来的fxtt7号</strong>（九游渠道）能留下来吗？</p>
-                </div>
-                
-                <div class="announcement-section">
-                    <h3>团队动态</h3>
-                    <p>由于 <strong>Minecraft-网易-1号小队</strong> 主机缺席，所以该小队已于2025年9月12日解散！</p>
-                    
-                    <p>2024年4月12日狗墨给予303作弊版泰拉瑞亚，现在已经刑满放行！</p>
-                </div>
-                
-                <div class="announcement-section">
-                    <h3>文件分享</h3>
-                    <p>科帝的分享文件：</p>
-                    
-                    <p>文件链接：<a href="https://www.alipan.com/s/AH6syytNQCv">https://www.alipan.com/s/AH6syytNQCv</a></p>
-                    
-                    <p>提取码: （请从场主那里获取）</p>
-                    
-                    <p>点击链接浏览器在线 查看/保存 文件；或者复制本段内容，打开「阿里云盘」APP ，无需下载极速在线查看，视频原画倍速播放。</p>
-                    
-                    <p>注：链接有时会变，请留意公告！</p>
-                </div>
-                
-                <div class="announcement-section">
-                    <h3>技术通知</h3>
-                    <p>2025年6月6日讯息，场主的iPad版Java我的世界暂时已无法使用，因为最近P12证书紧缺！</p>
-                    <p>2025年12月13日讯息，场主的iPad版Java我的世界已可正常使用，因为获取了新P12证书！</p>
-                    <p>2026年2月28日讯息，场主的iPad版Java我的世界暂时已无法使用，因为懒得修，新手机不香吗！</p>
-                </div>
-                
+        <!-- 卡片一：维护状态 -->
+        <div class="card">
+            <!-- 动画图标 -->
+            <div class="icon-wrapper">
+                <svg class="gear-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                    <circle cx="12" cy="12" r="3"/>
+                    <path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/>
+                </svg>
             </div>
 
-            <h2>场主的联系方式（序号代表优先度）</h2>
-                <h3><pre>
-1、电话拨打：15712376811
-2、微信联系(微信号)：fxtt122
-3、QQ联系(QQ号)：2076976616
-4、电子邮箱：2076976616@qq.com
-5、腾信会议(会议号)：3214159647</pre></h3>
+            <!-- 标题 -->
+            <h1>服务器维护中</h1>
+            <p class="subtitle">
+                网页正在跟随 Minecraft V3.0 服务器一并更新<br>届时，你将会看到第三代网页服务系统！
+            </p>
 
-            <p><a href="oi.html">oi~</a></p>
-        </section>
+            <!-- 倒计时 -->
+            <div class="countdown" id="countdown">
+                <div class="countdown-item">
+                    <span class="number" id="days">00</span>
+                    <span class="label">天</span>
+                </div>
+                <div class="countdown-item">
+                    <span class="number" id="hours">00</span>
+                    <span class="label">时</span>
+                </div>
+                <div class="countdown-item">
+                    <span class="number" id="minutes">00</span>
+                    <span class="label">分</span>
+                </div>
+                <div class="countdown-item">
+                    <span class="number" id="seconds">00</span>
+                    <span class="label">秒</span>
+                </div>
+            </div>
+
+            <!-- 进度条 -->
+            <div class="progress-wrap">
+                <div class="progress-bar">
+                    <div class="progress-fill" id="progressFill" style="width: 0%;"></div>
+                </div>
+                <p class="progress-text" id="progressText">维护进度 0%</p>
+            </div>
+            <p class="subtitle-small">* 第三代网页没你想的那么炫酷，这个页面只是临场发挥<br>真正第三代网页不会采用该页面样式，但也不差</p>
+        </div>
+
+        <!-- 卡片二：最新通知 -->
+        <div class="card card-notice">
+            <div class="notice-header">
+                <span class="notice-dot"></span>
+                <h3>📢 最新通知（同步源网站）</h3>
+            </div>
+            <ul class="notice-list">
+                <li>服务器 V3.0 完成进度请看上方进度条</li>
+                <li>想更快的看公告？试试 <a href="无名剧场.apk">这个软件</a></li>
+                <li>我们做出了抽象版手机 Java 版启动器，而且解决了非正版不能玩的问题（委屈因为这而花 89 元钱的人，所以定价 30 才能拿下这个抽象版 MC），具体信息请看 服务器信息-我的世界 底部"附加信息"板块。</li>
+                <li>天际用行动告诉我们，他已经不需要我们的任何技术支持了，已批准移出主场，已移入副场！</li>
+                <li>《新手计划》服务器已降了 2 次版本，多次覆写导致服务器硬盘已严重损坏！短时间已经无法再次更改任何服务器内容！场主近 6 周会在数据废墟里度过，无法游戏请谅解！</li>
+            </ul>
+        </div>
+
     </main>
 
-    <!-- 全屏查看模态框 -->
-    <div id="fullscreenModal" class="fullscreen-modal" onclick="closeFullscreen()">
-        <button class="close-modal" onclick="closeFullscreen()">&times;</button>
-        <img id="fullscreenImg" src="" alt="全屏查看" onclick="event.stopPropagation()">
-    </div>
-
-    <footer class="footer">
-        <div class="container">
-            <p>无名剧场网页服务系统</p>
-            <p>© 2025 追光系列. 保留所有权利.</p>
-        </div>
-    </footer>
-
     <script>
-        // ===== 智能图片加载系统 =====
-        // 点击缩略图加载并显示原图
-        function loadOriginalImage(thumbElement) {
-            const originalSrc = thumbElement.getAttribute('data-src');
-            const fullscreenImg = document.getElementById('fullscreenImg');
-            const modal = document.getElementById('fullscreenModal');
-            
-            // 1. 立即显示全屏框，先展示缩略图（即时反馈）
-            fullscreenImg.src = thumbElement.src;
-            fullscreenImg.alt = thumbElement.alt;
-            modal.classList.add('active');
-            document.body.style.overflow = 'hidden';
-            
-            // 2. 异步加载高清原图
-            const originalImage = new Image();
-            originalImage.onload = function() {
-                // 原图加载完成后，替换全屏显示的图片
-                fullscreenImg.src = originalSrc;
-            };
-            originalImage.onerror = function() {
-                console.error('原图加载失败:', originalSrc);
-                // 可以保持显示缩略图，或给用户一个提示
-            };
-            originalImage.src = originalSrc; // 开始加载
-        }
+        (function() {
+            // ============ 配置：维护结束时间 ============
+            const maintenanceEnd = new Date('2026-06-10T21:00:00');
+            // 维护开始时间（用于计算进度）
+            const maintenanceStart = new Date('2026-06-01T20:00:00');
+            // ============================================
 
-        // 关闭全屏查看器
-        function closeFullscreen() {
-            const modal = document.getElementById('fullscreenModal');
-            modal.classList.remove('active');
-            document.body.style.overflow = '';
-        }
+            const daysEl = document.getElementById('days');
+            const hoursEl = document.getElementById('hours');
+            const minutesEl = document.getElementById('minutes');
+            const secondsEl = document.getElementById('seconds');
+            const progressFill = document.getElementById('progressFill');
+            const progressText = document.getElementById('progressText');
 
-        // ESC键关闭全屏
-        document.addEventListener('keydown', function(event) {
-            if (event.key === 'Escape') {
-                closeFullscreen();
+            const totalDuration = maintenanceEnd.getTime() - maintenanceStart.getTime();
+
+            function pad(n) {
+                return String(n).padStart(2, '0');
             }
-        });
 
-        // 点击模态框背景或关闭按钮时关闭
-        document.getElementById('fullscreenModal').addEventListener('click', function(e) {
-            if (e.target === this || e.target.classList.contains('close-modal')) {
-                closeFullscreen();
+            function updateCountdown() {
+                const now = new Date().getTime();
+                let distance = maintenanceEnd.getTime() - now;
+
+                if (distance < 0) {
+                    distance = 0;
+                }
+
+                const d = Math.floor(distance / (1000 * 60 * 60 * 24));
+                const h = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                const m = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+                const s = Math.floor((distance % (1000 * 60)) / 1000);
+
+                daysEl.textContent = pad(d);
+                hoursEl.textContent = pad(h);
+                minutesEl.textContent = pad(m);
+                secondsEl.textContent = pad(s);
+
+                // 计算进度
+                if (totalDuration > 0 && now >= maintenanceStart.getTime()) {
+                    const elapsed = now - maintenanceStart.getTime();
+                    let progress = Math.min(100, Math.floor((elapsed / totalDuration) * 100));
+                    if (progress < 0) progress = 0;
+                    progressFill.style.width = progress + '%';
+                    progressText.textContent = '维护进度 ' + progress + '%';
+                } else if (now < maintenanceStart.getTime()) {
+                    progressFill.style.width = '0%';
+                    progressText.textContent = '维护即将开始...';
+                } else {
+                    progressFill.style.width = '100%';
+                    progressText.textContent = '维护已完成 ✓';
+                }
             }
-        });
+
+            updateCountdown();
+            const timer = setInterval(updateCountdown, 1000);
+
+            console.log('%c🚧 维护页面已就绪 %c| %c预计恢复时间: ' + maintenanceEnd.toLocaleString('zh-CN'),
+                'font-size:1.1em;', '', 'color:#818cf8;');
+        })();
     </script>
 </body>
 </html>

@@ -1,0 +1,4 @@
+# 我的世界服务器列表（名称|地址|端口可选）
+追光服务器-Minecraft-通用|mcv6.zgxl.us.kg
+追光服务器-Minecraft-北京|mcv4m-bj.zgxl.us.kg
+追光服务器-Minecraft-内蒙古|mcv4m-n.zgxl.us.kg

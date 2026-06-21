@@ -1,7 +1,7 @@
 # 我的世界服务器列表（名称|地址|检测方式|自定义信息）
 本机|127.0.0.1|A|IPv4，不通过代表你的手机不支持该软件
 IPv4测试|baidu.com|A|IPv4，不通过代表你的网络连接有问题，请重试
-IPv6测试|ipv6.baidu.com|AAAA|IPv6，不通过代表你不支持IPv6
+IPv6测试|bt.neu6.edu.cn|AAAA|IPv6，不通过代表你不支持IPv6
 追光服务器-Minecraft-北京-基|gmcv4m-bj.zgxl.us.kg|A|IPv4，不通过代表该线路已崩溃
 追光服务器-Minecraft-内蒙古-基|gmcv4m-n.zgxl.us.kg|A|IPv4，不通过代表该线路已崩溃
 追光服务器-Minecraft-通用|mcv6.zgxl.us.kg|SRV|IPv6，不通过代表暂时没有正在运行的服务器（确保你第3行的IPv6测试通过了）

@@ -1,7 +1,7 @@
 # 我的世界服务器列表（名称|地址|检测方式|自定义信息）
-追光服务器-Minecraft-通用-基|gmcv6.zgxl.us.kg|AAAA|这条100%不通过，看第4行结果判定你的IPv6
+本机|127.0.0.1|A|IPv4，不通过代表你的手机不支持该软件
 追光服务器-Minecraft-北京-基|gmcv4m-bj.zgxl.us.kg|A|IPv4，不通过代表该线路已崩溃
 追光服务器-Minecraft-内蒙古-基|gmcv4m-n.zgxl.us.kg|A|IPv4，不通过代表该线路已崩溃
-追光服务器-Minecraft-通用|mcv6.zgxl.us.kg|SRV|IPv6，不通过代表暂时没有正在运行的服务器
-追光服务器-Minecraft-北京|mcv4m-bj.zgxl.us.kg|SRV|IPv4，不通过代表没启用
-追光服务器-Minecraft-内蒙古|mcv4m-n.zgxl.us.kg|SRV|IPv4，不通过代表没启用
+追光服务器-Minecraft-通用|mcv6.zgxl.us.kg|SRV|IPv6，瞬间不通过代表你不支持IPv6，延迟不通过代表暂时没有正在运行的服务器
+追光服务器-Minecraft-北京|mcv4m-bj.zgxl.us.kg|SRV|IPv4，不通过代表没启用该线路
+追光服务器-Minecraft-内蒙古|mcv4m-n.zgxl.us.kg|SRV|IPv4，不通过代表没启用该线路

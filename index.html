@@ -10,6 +10,7 @@
     <link rel="apple-touch-icon" sizes="180x180" href="favicon/apple-touch-icon.png" />
     <link rel="manifest" href="favicon/site.webmanifest" />
     <style>
+        /* ===== 原有样式 (保持不变) ===== */
         :root {
             --primary-color: #5b9bd5;
             --primary-glow: #7ec8f8;
@@ -113,6 +114,7 @@
             filter: blur(80px);
             animation: splashGlowPulse 6s ease-in-out infinite;
         }
+
         .splash-ambient-glow.glow-1 {
             width: 280px;
             height: 280px;
@@ -121,6 +123,7 @@
             left: 20%;
             animation-delay: 0s;
         }
+
         .splash-ambient-glow.glow-2 {
             width: 240px;
             height: 240px;
@@ -129,6 +132,7 @@
             right: 15%;
             animation-delay: -3s;
         }
+
         .splash-ambient-glow.glow-3 {
             width: 200px;
             height: 200px;
@@ -176,6 +180,7 @@
             z-index: 0;
             animation: orbitalSpin 20s linear infinite;
         }
+
         .splash-orbital-ring.ring-1 {
             width: 260px;
             height: 260px;
@@ -185,6 +190,7 @@
             border-color: rgba(126, 200, 248, 0.2);
             animation-duration: 18s;
         }
+
         .splash-orbital-ring.ring-2 {
             width: 320px;
             height: 320px;
@@ -195,6 +201,7 @@
             animation-duration: 25s;
             animation-direction: reverse;
         }
+
         .splash-orbital-ring.ring-3 {
             width: 380px;
             height: 380px;
@@ -429,6 +436,7 @@
             transform: translate(-50%, -50%) scale(0);
             opacity: 0;
         }
+
         .shockwave-ring.triggered {
             animation: shockwaveBurst 0.7s ease-out forwards;
         }
@@ -961,14 +969,17 @@
         body.splash-gone .footer {
             animation: mainContentReveal 0.5s ease forwards;
         }
+
         body.splash-gone .header {
             animation-delay: 0.05s;
             opacity: 0;
         }
+
         body.splash-gone main {
             animation-delay: 0.12s;
             opacity: 0;
         }
+
         body.splash-gone .footer {
             animation-delay: 0.2s;
             opacity: 0;
@@ -1038,6 +1049,7 @@
                 --shadow-lg: 0 16px 40px rgba(0, 0, 0, 0.4);
                 --shadow-glow: 0 0 40px rgba(126, 200, 248, 0.12);
             }
+
             body {
                 background:
                     radial-gradient(ellipse 80% 60% at 15% 25%, rgba(91, 155, 213, 0.10) 0%, transparent 55%),
@@ -1047,6 +1059,7 @@
                     radial-gradient(ellipse 50% 40% at 25% 85%, rgba(91, 155, 213, 0.07) 0%, transparent 55%),
                     linear-gradient(175deg, #14161e 0%, #181a24 25%, #15171f 50%, #191c26 75%, #161820 100%);
             }
+
             .glass-card,
             .project-list li,
             pre,
@@ -1055,73 +1068,93 @@
                 background: rgba(24, 27, 34, 0.72);
                 border-color: rgba(255, 255, 255, 0.07);
             }
+
             .project-list li:hover {
                 background: rgba(30, 34, 42, 0.78);
                 border-color: rgba(255, 255, 255, 0.16);
                 box-shadow: var(--shadow-lg), 0 0 50px rgba(126, 200, 248, 0.1);
             }
+
             .project-list li::before {
                 background: radial-gradient(ellipse, rgba(255, 255, 255, 0.08) 0%, transparent 70%);
             }
+
             pre:hover,
             .contact-info:hover,
             .announcement-content:hover {
                 border-color: rgba(255, 255, 255, 0.14);
             }
+
             h1,
             h2,
             h3 {
                 color: #d8dde4;
             }
+
             h1::after {
                 background: linear-gradient(90deg, #5b9bd5, #7ec8f8, #5b9bd5);
             }
+
             h2 {
                 border-image: linear-gradient(90deg, #5b9bd5, transparent) 1;
             }
+
             .project-list a {
                 color: #d0d6e0;
             }
+
             .project-list a:hover {
                 color: #7ec8f8;
             }
+
             .announcement-section h3 {
                 color: #7ec8f8;
                 border-bottom-color: rgba(126, 200, 248, 0.2);
             }
+
             .announcement-content a {
                 color: #f0a090;
             }
+
             .announcement-content a:hover {
                 color: #f5c0b5;
             }
+
             .announcement-content a::after {
                 background: #f0a090;
             }
+
             .image-grid img {
                 border-color: rgba(255, 255, 255, 0.12);
             }
+
             .image-grid img:hover {
                 border-color: rgba(255, 255, 255, 0.3);
             }
+
             .image-group h4 {
                 background: rgba(126, 200, 248, 0.12);
                 color: #7ec8f8;
             }
+
             .footer p {
                 color: rgba(255, 255, 255, 0.7);
             }
+
             .footer p:first-child {
                 color: rgba(255, 255, 255, 0.85);
             }
+
             .close-modal {
                 background: rgba(255, 255, 255, 0.06);
                 border-color: rgba(255, 255, 255, 0.15);
             }
+
             .close-modal:hover {
                 background: rgba(255, 255, 255, 0.15);
                 border-color: rgba(255, 255, 255, 0.35);
             }
+
             .header {
                 background: linear-gradient(160deg,
                         rgba(55, 95, 135, 0.82) 0%,
@@ -1130,6 +1163,7 @@
                 border-bottom-color: rgba(255, 255, 255, 0.12);
                 box-shadow: 0 6px 28px rgba(0, 0, 0, 0.4);
             }
+
             .header::after {
                 background: linear-gradient(90deg,
                         transparent 0%,
@@ -1138,24 +1172,29 @@
                         rgba(255, 255, 255, 0.2) 70%,
                         transparent 100%);
             }
+
             .footer {
                 background: linear-gradient(180deg,
                         rgba(20, 25, 35, 0.92) 0%,
                         rgba(14, 17, 24, 0.96) 100%);
                 border-top-color: rgba(255, 255, 255, 0.08);
             }
+
             #splash-screen {
                 background:
                     radial-gradient(ellipse 70% 50% at 50% 35%, rgba(20, 35, 55, 0.96) 0%, rgba(5, 8, 16, 0.99) 60%, #020408 100%);
             }
+
             .splash-enter-btn {
                 background: rgba(255, 255, 255, 0.04);
                 border-color: rgba(255, 255, 255, 0.2);
             }
+
             .splash-enter-btn:hover {
                 background: rgba(255, 255, 255, 0.1);
                 border-color: rgba(255, 255, 255, 0.5);
             }
+
             #burst-circle {
                 background: radial-gradient(circle,
                         #f0f2f8 0%,
@@ -1173,18 +1212,23 @@
                 transition-duration: 0.01ms !important;
                 animation-duration: 0.01ms !important;
             }
+
             html {
                 scroll-behavior: auto;
             }
+
             .project-list li:hover {
                 transform: none;
             }
+
             .image-grid img:hover {
                 transform: none;
             }
+
             #splash-screen {
                 display: none !important;
             }
+
             body {
                 overflow: auto !important;
             }
@@ -1194,12 +1238,15 @@
             .project-list li:hover {
                 transform: none;
             }
+
             .project-list li::before {
                 display: none;
             }
+
             .image-grid img:hover {
                 transform: none;
             }
+
             .splash-enter-btn:hover {
                 transform: none;
                 box-shadow:
@@ -1209,6 +1256,214 @@
                 background: rgba(255, 255, 255, 0.06);
                 border-color: rgba(255, 255, 255, 0.3);
                 letter-spacing: 0.06em;
+            }
+        }
+
+        /* ===== 新增：连接弹窗样式 ===== */
+        .connect-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            backdrop-filter: blur(6px);
+            -webkit-backdrop-filter: blur(6px);
+            z-index: 99999;
+            display: none;
+            justify-content: center;
+            align-items: center;
+            animation: fadeIn 0.25s ease;
+        }
+
+        .connect-overlay.active {
+            display: flex;
+        }
+
+        .connect-dialog {
+            background: rgba(255, 255, 255, 0.85);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3), 0 0 40px rgba(91, 155, 213, 0.15);
+            max-width: 460px;
+            width: 90%;
+            padding: 28px 32px 24px;
+            border: 1px solid rgba(255, 255, 255, 0.5);
+            transition: transform 0.2s ease;
+            animation: zoomIn 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .connect-dialog h2 {
+            margin-top: 0;
+            margin-bottom: 16px;
+            color: var(--secondary-color);
+            font-size: 1.6rem;
+            font-weight: 700;
+            border: none;
+            padding-bottom: 0;
+            letter-spacing: 0.02em;
+        }
+
+        .connect-dialog .dialog-content {
+            font-size: 1rem;
+            line-height: 1.7;
+            color: var(--text-color);
+            margin-bottom: 24px;
+            min-height: 3.5em;
+        }
+
+        .connect-dialog .dialog-actions {
+            display: flex;
+            justify-content: flex-end;
+            gap: 12px;
+            flex-wrap: wrap;
+        }
+
+        .connect-dialog .dialog-actions .btn {
+            padding: 10px 28px;
+            border: none;
+            border-radius: 40px;
+            font-size: 0.95rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: var(--transition);
+            box-shadow: var(--shadow-sm);
+            letter-spacing: 0.03em;
+            min-width: 80px;
+            text-align: center;
+        }
+
+        .connect-dialog .dialog-actions .btn-white {
+            background: rgba(255, 255, 255, 0.7);
+            color: var(--secondary-color);
+            border: 1px solid rgba(0, 0, 0, 0.1);
+        }
+
+        .connect-dialog .dialog-actions .btn-white:hover {
+            background: rgba(255, 255, 255, 0.9);
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-md);
+        }
+
+        .connect-dialog .dialog-actions .btn-blue {
+            background: var(--primary-color);
+            color: #fff;
+            border: 1px solid var(--primary-color);
+        }
+
+        .connect-dialog .dialog-actions .btn-blue:hover {
+            background: #4a8bc2;
+            transform: translateY(-2px);
+            box-shadow: 0 8px 24px rgba(91, 155, 213, 0.35);
+        }
+
+        .connect-dialog .dialog-actions .btn-green {
+            background: #2ecc71;
+            color: #fff;
+            border: 1px solid #2ecc71;
+        }
+
+        .connect-dialog .dialog-actions .btn-green:hover {
+            background: #27ae60;
+            transform: translateY(-2px);
+            box-shadow: 0 8px 24px rgba(46, 204, 113, 0.35);
+        }
+
+        .connect-dialog .dialog-actions .btn:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+            transform: none !important;
+            box-shadow: none !important;
+        }
+
+        .connect-dialog .dialog-actions .btn-center {
+            flex: 1;
+            justify-content: center;
+        }
+
+        .connect-dialog .spinner {
+            display: inline-block;
+            width: 24px;
+            height: 24px;
+            border: 3px solid rgba(91, 155, 213, 0.2);
+            border-top-color: var(--primary-color);
+            border-radius: 50%;
+            animation: spin 0.8s linear infinite;
+            vertical-align: middle;
+            margin-right: 12px;
+        }
+
+        @keyframes spin {
+            to {
+                transform: rotate(360deg);
+            }
+        }
+
+        .connect-dialog .checking-text {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        @media (prefers-color-scheme: dark) {
+            .connect-dialog {
+                background: rgba(30, 34, 42, 0.9);
+                border-color: rgba(255, 255, 255, 0.1);
+            }
+
+            .connect-dialog h2 {
+                color: #d8dde4;
+            }
+
+            .connect-dialog .dialog-content {
+                color: #d0d6e0;
+            }
+
+            .connect-dialog .dialog-actions .btn-white {
+                background: rgba(255, 255, 255, 0.1);
+                color: #d0d6e0;
+                border-color: rgba(255, 255, 255, 0.15);
+            }
+
+            .connect-dialog .dialog-actions .btn-white:hover {
+                background: rgba(255, 255, 255, 0.2);
+            }
+
+            .connect-dialog .dialog-actions .btn-blue {
+                background: #4a8bc2;
+                border-color: #4a8bc2;
+            }
+
+            .connect-dialog .dialog-actions .btn-blue:hover {
+                background: #5b9bd5;
+            }
+
+            .connect-dialog .dialog-actions .btn-green {
+                background: #27ae60;
+                border-color: #27ae60;
+            }
+
+            .connect-dialog .dialog-actions .btn-green:hover {
+                background: #2ecc71;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .connect-dialog {
+                padding: 20px 18px 18px;
+            }
+
+            .connect-dialog h2 {
+                font-size: 1.3rem;
+            }
+
+            .connect-dialog .dialog-actions .btn {
+                padding: 8px 18px;
+                font-size: 0.9rem;
+                min-width: 70px;
             }
         }
     </style>
@@ -1275,6 +1530,8 @@
                 <li><a href="announcement.html">腾讯会议状态信息</a></li>
                 <li><a href="servers.html">游戏服务器信息</a></li>
                 <li><a href="activity.html">活动</a></li>
+                <!-- 新增卡片 -->
+                <li><a href="javascript:void(0)" id="connect-server-link">连接【追光服务器】</a></li>
             </ul>
 
             <h2>公告</h2>
@@ -1291,9 +1548,17 @@
                 <div class="announcement-section">
                     <h3>重要通知</h3>
                     <p>想更快的看公告？试试<a href="无名剧场.apk">这个软件</a></p>
-                    <p>每次都要开始玩了才发现没有IPv6？想不进Minecraft就查看服务器是否在线？欢迎使用追光系列开发的“线路检测”移动APP！可以一键检测IPv6是否连通，软件以Minecraft为主题，兼容检测Minecraft所有线路状态及延迟，前往【游戏服务器信息】-【我的世界】-“服务器地址及名称”下方的【下载“线路检测”软件】就能免费获取！（使用无名剧场软件访问的用户请移步到浏览器下载该软件）</p>
+                    <p>每次都要开始玩了才发现没有IPv6？想不进Minecraft就查看服务器是否在线？欢迎使用追光系列开发的"线路检测"移动APP！可以一键检测IPv6是否连通，软件以Minecraft为主题，兼容检测Minecraft所有线路状态及延迟，前往【游戏服务器信息】-【我的世界】-"服务器地址及名称"下方的【下载"线路检测"软件】就能免费获取！（使用无名剧场软件访问的用户请移步到浏览器下载该软件）</p>
                     <p>我们做出了抽象+超优化版 Minecraft手机Java版启动器 ，而且解决了非正版不能玩的问题（其实是强制不能使用正版），具体信息请看 服务器信息-我的世界 底部"附加信息"板块。</p>
                     <p>Minecraft服务器V3.0基础版已升级完成，完整版你们暂时不需要知道相关信息，对服务器性能影响……不大？</p>
+                    <p>2026年7月26日14:01网易我的世界 <strong>刚来的fxtt电脑</strong> 升级至50级！</p>
+                    <div class="image-grid">
+                        <img class="lazy-thumbnail" 
+                            src="50级.jpg" 
+                            data-src="50级.jpg"
+                            alt="50级"
+                            onclick="loadOriginalImage(this)">
+                    </div>
                     <h4>在此纪念 <strong>刚来的fxtt8号</strong> 以及阳谋的旧网易我的世界账号</h4>
                     <p>无奖竞猜：大家猜猜 <strong>刚来的fxtt7号</strong>（九游渠道）能留下来吗？</p>
                 </div>
@@ -1346,9 +1611,22 @@
         </div>
     </footer>
 
+    <!-- ===== 新增：连接服务器弹窗 ===== -->
+    <div id="connectOverlay" class="connect-overlay">
+        <div class="connect-dialog" id="connectDialog">
+            <h2 id="dialogTitle">连接提示</h2>
+            <div class="dialog-content" id="dialogContent">
+                追光服务器只能通过IPv6连接，请确保你的网络支持IPv6，需要先检查连通性，是否开始检查连接？
+            </div>
+            <div class="dialog-actions" id="dialogActions">
+                <!-- 按钮由JS动态生成 -->
+            </div>
+        </div>
+    </div>
+
     <script>
         (function() {
-            // ===== 启动页逻辑 =====
+            // ===== 启动页逻辑 (保持不变) =====
             const STORAGE_KEY = 'wnjc_splash_viewed_v1';
             const splashScreen = document.getElementById('splash-screen');
             const splashContent = document.getElementById('splash-content');
@@ -1357,25 +1635,20 @@
             const splashCanvas = document.getElementById('splash-canvas');
             const ctx = splashCanvas.getContext('2d');
 
-            // 检查是否已经访问过
             const hasVisited = localStorage.getItem(STORAGE_KEY);
 
             if (hasVisited) {
-                // 已访问过，直接隐藏启动页
                 splashScreen.classList.add('removed');
                 document.body.classList.add('splash-gone');
-                // 清理动画延迟后body类名（让动画完成）
                 setTimeout(() => {
                     document.body.classList.remove('splash-gone');
                 }, 800);
             } else {
-                // 首次访问，显示启动页
                 document.body.style.overflow = 'hidden';
                 initSplashParticles();
                 bindEnterEvent();
             }
 
-            // ===== Canvas粒子系统 =====
             function initSplashParticles() {
                 let width = splashCanvas.width = window.innerWidth;
                 let height = splashCanvas.height = window.innerHeight;
@@ -1395,7 +1668,6 @@
 
                 const particles = [];
 
-                // 背景粒子（小而暗）
                 for (let i = 0; i < bgParticleCount; i++) {
                     particles.push({
                         x: Math.random() * width,
@@ -1411,7 +1683,6 @@
                     });
                 }
 
-                // 前景粒子（稍大稍亮）
                 for (let i = 0; i < fgParticleCount; i++) {
                     particles.push({
                         x: Math.random() * width,
@@ -1427,7 +1698,6 @@
                     });
                 }
 
-                // 萤火虫粒子（暖色，周期性闪烁）
                 for (let i = 0; i < fireflyCount; i++) {
                     particles.push({
                         x: Math.random() * width,
@@ -1444,7 +1714,6 @@
                     });
                 }
 
-                // 流星粒子（快速移动）
                 const shootingStars = [];
                 for (let i = 0; i < shootingStarCount; i++) {
                     shootingStars.push({
@@ -1467,12 +1736,9 @@
                 function animate() {
                     ctx.clearRect(0, 0, width, height);
 
-                    // 更新和绘制所有粒子
                     for (let p of particles) {
                         p.x += p.speedX;
                         p.y += p.speedY;
-
-                        // 循环边界
                         if (p.x < -20) p.x = width + 20;
                         if (p.x > width + 20) p.x = -20;
                         if (p.y < -20) p.y = height + 20;
@@ -1492,7 +1758,6 @@
                         ctx.fillStyle = p.color + `,${Math.min(currentOpacity, 0.9)})`;
                         ctx.fill();
 
-                        // 亮粒子加光晕
                         if (currentOpacity > 0.45 && p.size > 1.2) {
                             const glow = ctx.createRadialGradient(p.x, p.y, 0, p.x, p.y, p.size * 3.5);
                             glow.addColorStop(0, p.color + `,${currentOpacity * 0.5})`);
@@ -1504,11 +1769,9 @@
                         }
                     }
 
-                    // 更新和绘制流星
                     for (let ss of shootingStars) {
                         ss.cooldown--;
                         if (ss.cooldown <= 0 && ss.life <= 0) {
-                            // 激活流星
                             ss.x = Math.random() * width;
                             ss.y = Math.random() * height * 0.4;
                             ss.life = ss.maxLife;
@@ -1525,7 +1788,6 @@
                             ss.y += ss.speedY;
                             ss.opacity *= 0.985;
 
-                            // 绘制拖尾
                             for (let t = 0; t < ss.trail.length; t++) {
                                 const tr = ss.trail[t];
                                 const trailOpacity = tr.opacity * (1 - t / ss.trail.length) * 0.6;
@@ -1535,7 +1797,6 @@
                                 ctx.fillStyle = ss.color + `,${trailOpacity})`;
                                 ctx.fill();
                             }
-                            // 绘制头部
                             ctx.beginPath();
                             ctx.arc(ss.x, ss.y, ss.size, 0, Math.PI * 2);
                             ctx.fillStyle = ss.color + `,${ss.opacity})`;
@@ -1560,7 +1821,6 @@
 
                 animate();
 
-                // 窗口大小变化时更新
                 const resizeHandler = () => {
                     width = splashCanvas.width = window.innerWidth;
                     height = splashCanvas.height = window.innerHeight;
@@ -1570,33 +1830,24 @@
                     splashCanvas.style.height = height + 'px';
                     ctx.setTransform(1, 0, 0, 1, 0, 0);
                     ctx.scale(dpr, dpr);
-                    // 重新分布粒子
                     for (let p of particles) {
                         p.x = Math.min(p.x, width);
                         p.y = Math.min(p.y, height);
                     }
                 };
                 window.addEventListener('resize', resizeHandler);
-
-                // 存储清理函数
                 splashScreen._cleanup = () => {
                     cancelAnimationFrame(animFrame);
                     window.removeEventListener('resize', resizeHandler);
                 };
             }
 
-            // ===== 进入按钮事件 =====
             function bindEnterEvent() {
                 const handleEnter = () => {
-                    // 防止重复点击
                     if (splashScreen.classList.contains('transitioning')) return;
                     splashScreen.classList.add('transitioning');
-
-                    // 禁用按钮
                     enterBtn.disabled = true;
                     enterBtn.style.pointerEvents = 'none';
-
-                    // 1. 按钮发光爆发
                     enterBtn.style.transition = 'all 0.15s ease';
                     enterBtn.style.boxShadow =
                         '0 0 80px 30px rgba(255,255,255,0.9), 0 0 160px 60px rgba(200,220,255,0.7), 0 0 240px 100px rgba(150,200,240,0.5)';
@@ -1604,7 +1855,6 @@
                     enterBtn.style.borderColor = 'rgba(255,255,255,1)';
                     enterBtn.style.transform = 'scale(1.06)';
 
-                    // 2. 冲击波环触发
                     const rings = [
                         document.getElementById('shockwave-ring-1'),
                         document.getElementById('shockwave-ring-2'),
@@ -1617,36 +1867,28 @@
                         }, i * 60);
                     });
 
-                    // 3. 启动页内容淡出
                     setTimeout(() => {
                         splashContent.classList.add('hiding');
                     }, 80);
 
-                    // 4. 爆发扩散圆扩展
                     setTimeout(() => {
                         burstCircle.classList.add('expanding');
                     }, 120);
 
-                    // 5. 扩散圆覆盖后，启动页淡出
                     setTimeout(() => {
                         splashScreen.classList.add('fading-out');
                     }, 400);
 
-                    // 6. 扩散圆开始淡出
                     setTimeout(() => {
                         burstCircle.classList.add('fading-away');
                     }, 600);
 
-                    // 7. 完全移除启动页，显示主页
                     setTimeout(() => {
                         splashScreen.classList.add('removed');
                         document.body.style.overflow = '';
                         document.body.classList.add('splash-gone');
-                        // 清理粒子动画
                         if (splashScreen._cleanup) splashScreen._cleanup();
-                        // 设置访问标记
                         localStorage.setItem(STORAGE_KEY, '1');
-                        // 清理body类名
                         setTimeout(() => {
                             document.body.classList.remove('splash-gone');
                         }, 600);
@@ -1654,8 +1896,6 @@
                 };
 
                 enterBtn.addEventListener('click', handleEnter);
-
-                // 键盘Enter键支持
                 const keyHandler = (e) => {
                     if (e.key === 'Enter' && !splashScreen.classList.contains('transitioning')) {
                         handleEnter();
@@ -1665,7 +1905,6 @@
                 splashScreen._keyCleanup = () => document.removeEventListener('keydown', keyHandler);
             }
 
-            // 清理（在移除启动页时调用）
             const origRemoved = splashScreen.classList;
             const observer = new MutationObserver((mutations) => {
                 mutations.forEach((mutation) => {
@@ -1679,51 +1918,204 @@
                 });
             });
             observer.observe(splashScreen, { attributes: true, attributeFilter: ['class'] });
+
+            // ===== 原有图片加载系统 (保持不变) =====
+            window.loadOriginalImage = function(thumbElement) {
+                const originalSrc = thumbElement.getAttribute('data-src');
+                const fullscreenImg = document.getElementById('fullscreenImg');
+                const modal = document.getElementById('fullscreenModal');
+                fullscreenImg.src = thumbElement.src;
+                fullscreenImg.alt = thumbElement.alt;
+                modal.classList.add('active');
+                document.body.style.overflow = 'hidden';
+                const originalImage = new Image();
+                originalImage.onload = function() {
+                    fullscreenImg.src = originalSrc;
+                };
+                originalImage.onerror = function() {
+                    console.error('原图加载失败:', originalSrc);
+                };
+                originalImage.src = originalSrc;
+            };
+
+            window.closeFullscreen = function() {
+                const modal = document.getElementById('fullscreenModal');
+                modal.classList.remove('active');
+                document.body.style.overflow = '';
+            };
+
+            document.addEventListener('keydown', function(event) {
+                if (event.key === 'Escape') {
+                    closeFullscreen();
+                }
+            });
+
+            document.getElementById('fullscreenModal').addEventListener('click', function(e) {
+                if (e.target === this || e.target.classList.contains('close-modal')) {
+                    closeFullscreen();
+                }
+            });
+
+            document.getElementById('fullscreenImg').addEventListener('dblclick', function(e) {
+                e.stopPropagation();
+                closeFullscreen();
+            });
+
+            // ===== 新增：连接服务器功能 =====
+            const overlay = document.getElementById('connectOverlay');
+            const dialogTitle = document.getElementById('dialogTitle');
+            const dialogContent = document.getElementById('dialogContent');
+            const dialogActions = document.getElementById('dialogActions');
+
+            // 状态管理
+            let isChecking = false;
+
+            // 辅助：清空按钮区域，创建按钮
+            function setButtons(buttons) {
+                dialogActions.innerHTML = '';
+                buttons.forEach(btn => {
+                    const el = document.createElement('button');
+                    el.className = `btn ${btn.class || ''}`;
+                    el.textContent = btn.text;
+                    if (btn.id) el.id = btn.id;
+                    if (btn.disabled) el.disabled = true;
+                    if (btn.onclick) {
+                        el.addEventListener('click', btn.onclick);
+                    }
+                    dialogActions.appendChild(el);
+                });
+            }
+
+            // 关闭弹窗（完全关闭）
+            function closeDialog() {
+                overlay.classList.remove('active');
+                document.body.style.overflow = '';
+                isChecking = false;
+                // 重置为初始状态（以便下次打开）
+                resetDialogToInitial();
+            }
+
+            // 重置弹窗到初始提示状态
+            function resetDialogToInitial() {
+                dialogTitle.textContent = '连接提示';
+                dialogContent.innerHTML = '追光服务器只能通过IPv6连接，请确保你的网络支持IPv6，需要先检查连通性，是否开始检查连接？';
+                setButtons([
+                    { text: '取消', class: 'btn-white', onclick: closeDialog },
+                    { text: '检查连接', class: 'btn-blue', onclick: startCheck }
+                ]);
+            }
+
+            // 检查中状态（无按钮）
+            function showChecking() {
+                dialogTitle.textContent = '检查连通性';
+                dialogContent.innerHTML = `
+                    <div class="checking-text">
+                        <span class="spinner"></span>
+                        正在检查连通性，请稍等片刻……
+                    </div>
+                `;
+                setButtons([]); // 无按钮
+            }
+
+            // 检查失败（不支持IPv6）
+            function showFailure() {
+                dialogTitle.textContent = '检测连通性';
+                dialogContent.textContent = '您的网络似乎不支持IPv6，请检查并重试。';
+                setButtons([
+                    { text: '返回', class: 'btn-white', onclick: closeDialog },
+                    { text: '重试', class: 'btn-blue', onclick: startCheck }
+                ]);
+            }
+
+            // 检查成功（可达）
+            function showSuccess() {
+                dialogTitle.textContent = '检查连通性';
+                dialogContent.textContent = '检测到服务器！是否连接？';
+                setButtons([
+                    { text: '连接！', class: 'btn-green', onclick: function() {
+                        // 点击连接：在新窗口打开B站
+                        window.open('https://zgxl.qzz.io/', '_blank');
+                        closeDialog();
+                    }}
+                ]);
+            }
+
+            // 核心检测函数（no-cors 模式，零配置）
+            function checkB站点() {
+                return new Promise((resolve) => {
+                    const controller = new AbortController();
+                    // 设置 5 秒超时（IPv6 延迟高可改为 8000）
+                    const timeoutId = setTimeout(() => controller.abort(), 5000);
+
+                    fetch('https://zgxl.qzz.io/', {
+                        method: 'HEAD',
+                        mode: 'no-cors',          // 关键：彻底绕过 CORS
+                        signal: controller.signal,
+                    })
+                    .then(() => {
+                        // 能执行到这里，说明 TCP+TLS 握手成功（即 IPv6 通了）
+                        clearTimeout(timeoutId);
+                        resolve({ reachable: true });
+                    })
+                    .catch((error) => {
+                        clearTimeout(timeoutId);
+                        // 失败原因：DNS解析失败（无AAAA记录）、TCP连接超时、证书彻底无效等
+                        resolve({ reachable: false });
+                    });
+                });
+            }
+
+            // 开始检查流程
+            async function startCheck() {
+                if (isChecking) return;
+                isChecking = true;
+
+                // 显示检查中
+                showChecking();
+
+                // 执行检测
+                const result = await checkB站点();
+
+                if (result.reachable) {
+                    showSuccess();
+                } else {
+                    showFailure();
+                }
+                isChecking = false;
+            }
+
+            // 点击卡片触发
+            document.getElementById('connect-server-link').addEventListener('click', function(e) {
+                e.preventDefault();
+                // 重置弹窗到初始状态（避免上次残留）
+                resetDialogToInitial();
+                overlay.classList.add('active');
+                document.body.style.overflow = 'hidden';
+            });
+
+            // 阻止点击背景关闭
+            overlay.addEventListener('click', function(e) {
+                if (e.target === overlay) {
+                    // 不关闭
+                }
+            });
+
+            // 阻止ESC关闭（但按下ESC会触发全屏图片的关闭，但我们不处理连接弹窗的ESC）
+            // 我们可以在全局keydown中增加判断，如果连接弹窗打开，阻止ESC关闭
+            const originalKeydown = document._listeners && document._listeners.keydown;
+            document.addEventListener('keydown', function(e) {
+                if (e.key === 'Escape' && overlay.classList.contains('active')) {
+                    e.stopPropagation();
+                    // 不关闭
+                }
+            }, true); // 使用捕获阶段优先
+
+            // 初始化时设置初始按钮
+            resetDialogToInitial();
+
+            // 确保在关闭时重置
+            // 将resetDialogToInitial也暴露给其他可能的地方
         })();
-
-        // ===== 原有图片加载系统 =====
-        function loadOriginalImage(thumbElement) {
-            const originalSrc = thumbElement.getAttribute('data-src');
-            const fullscreenImg = document.getElementById('fullscreenImg');
-            const modal = document.getElementById('fullscreenModal');
-
-            fullscreenImg.src = thumbElement.src;
-            fullscreenImg.alt = thumbElement.alt;
-            modal.classList.add('active');
-            document.body.style.overflow = 'hidden';
-
-            const originalImage = new Image();
-            originalImage.onload = function() {
-                fullscreenImg.src = originalSrc;
-            };
-            originalImage.onerror = function() {
-                console.error('原图加载失败:', originalSrc);
-            };
-            originalImage.src = originalSrc;
-        }
-
-        function closeFullscreen() {
-            const modal = document.getElementById('fullscreenModal');
-            modal.classList.remove('active');
-            document.body.style.overflow = '';
-        }
-
-        document.addEventListener('keydown', function(event) {
-            if (event.key === 'Escape') {
-                closeFullscreen();
-            }
-        });
-
-        document.getElementById('fullscreenModal').addEventListener('click', function(e) {
-            if (e.target === this || e.target.classList.contains('close-modal')) {
-                closeFullscreen();
-            }
-        });
-
-        document.getElementById('fullscreenImg').addEventListener('dblclick', function(e) {
-            e.stopPropagation();
-            closeFullscreen();
-        });
     </script>
 </body>
 </html>

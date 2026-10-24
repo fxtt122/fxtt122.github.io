@@ -18,15 +18,9 @@
             --max-content-width: 1200px;
         }
 
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
 
-        html {
-            scroll-behavior: smooth;
-        }
+        html { scroll-behavior: smooth; }
 
         body {
             font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "PingFang SC", "Microsoft YaHei", sans-serif;
@@ -44,6 +38,8 @@
             overflow-x: hidden;
             -webkit-font-smoothing: antialiased;
             -moz-osx-font-smoothing: grayscale;
+            display: flex;
+            flex-direction: column;
         }
 
         .container {
@@ -53,6 +49,8 @@
             position: relative;
             z-index: 1;
         }
+
+        main.container { flex: 1 0 auto; }
 
         .header {
             background: linear-gradient(160deg,
@@ -72,9 +70,7 @@
         .header::after {
             content: '';
             position: absolute;
-            bottom: 0;
-            left: 0;
-            right: 0;
+            bottom: 0; left: 0; right: 0;
             height: 1px;
             background: linear-gradient(90deg,
                     transparent 0%,
@@ -95,9 +91,7 @@
             z-index: 2;
         }
 
-        .content-section {
-            padding: 2.5rem 0;
-        }
+        .content-section { padding: 2.5rem 0; }
 
         h1 {
             text-align: center;
@@ -129,23 +123,10 @@
         }
 
         @keyframes pulseFloat {
-            0%,
-            100% {
-                transform: translate(0, 0) scale(1);
-                opacity: 0.45;
-            }
-            25% {
-                transform: translate(15px, -20px) scale(1.3);
-                opacity: 0.7;
-            }
-            50% {
-                transform: translate(-8px, -35px) scale(0.9);
-                opacity: 0.35;
-            }
-            75% {
-                transform: translate(-18px, -10px) scale(1.2);
-                opacity: 0.6;
-            }
+            0%, 100% { transform: translate(0, 0) scale(1); opacity: 0.45; }
+            25% { transform: translate(15px, -20px) scale(1.3); opacity: 0.7; }
+            50% { transform: translate(-8px, -35px) scale(0.9); opacity: 0.35; }
+            75% { transform: translate(-18px, -10px) scale(1.2); opacity: 0.6; }
         }
 
         .footer {
@@ -165,9 +146,7 @@
         .footer::before {
             content: '';
             position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
+            top: 0; left: 0; right: 0;
             height: 1px;
             background: linear-gradient(90deg,
                     transparent 0%,
@@ -191,30 +170,15 @@
             color: rgba(255, 255, 255, 0.9);
         }
 
-        @media (min-width: 768px) {
-            .container {
-                max-width: 720px;
-            }
-        }
-
-        @media (min-width: 992px) {
-            .container {
-                max-width: 960px;
-            }
-        }
-
-        @media (min-width: 1200px) {
-            .container {
-                max-width: var(--max-content-width);
-            }
-        }
+        @media (min-width: 768px) { .container { max-width: 720px; } }
+        @media (min-width: 992px) { .container { max-width: 960px; } }
+        @media (min-width: 1200px) { .container { max-width: var(--max-content-width); } }
 
         @media (prefers-color-scheme: dark) {
             :root {
                 --text-color: #e0e0e0;
                 --secondary-color: #d0d6e0;
             }
-
             body {
                 background:
                     radial-gradient(ellipse 80% 60% at 15% 25%, rgba(91, 155, 213, 0.10) 0%, transparent 55%),
@@ -224,15 +188,8 @@
                     radial-gradient(ellipse 50% 40% at 25% 85%, rgba(91, 155, 213, 0.07) 0%, transparent 55%),
                     linear-gradient(175deg, #14161e 0%, #181a24 25%, #15171f 50%, #191c26 75%, #161820 100%);
             }
-
-            h1 {
-                color: #d8dde4;
-            }
-
-            h1::after {
-                background: linear-gradient(90deg, #5b9bd5, #7ec8f8, #5b9bd5);
-            }
-
+            h1 { color: #d8dde4; }
+            h1::after { background: linear-gradient(90deg, #5b9bd5, #7ec8f8, #5b9bd5); }
             .header {
                 background: linear-gradient(160deg,
                         rgba(55, 95, 135, 0.82) 0%,
@@ -241,7 +198,6 @@
                 border-bottom-color: rgba(255, 255, 255, 0.12);
                 box-shadow: 0 6px 28px rgba(0, 0, 0, 0.4);
             }
-
             .header::after {
                 background: linear-gradient(90deg,
                         transparent 0%,
@@ -250,63 +206,566 @@
                         rgba(255, 255, 255, 0.2) 70%,
                         transparent 100%);
             }
-
             .footer {
                 background: linear-gradient(180deg,
                         rgba(20, 25, 35, 0.92) 0%,
                         rgba(14, 17, 24, 0.96) 100%);
                 border-top-color: rgba(255, 255, 255, 0.08);
             }
-
-            .footer p {
-                color: rgba(255, 255, 255, 0.7);
-            }
-
-            .footer p:first-child {
-                color: rgba(255, 255, 255, 0.85);
-            }
+            .footer p { color: rgba(255, 255, 255, 0.7); }
+            .footer p:first-child { color: rgba(255, 255, 255, 0.85); }
         }
 
         @media (prefers-reduced-motion: reduce) {
-            html {
-                scroll-behavior: auto;
-            }
+            html { scroll-behavior: auto; }
+            .pulse-dot { animation: none; }
+        }
 
-            .pulse-dot {
-                animation: none;
+        /* ============================================================
+           数据错误层
+           ============================================================ */
+
+        .error-panel {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 1.35rem;
+            padding: 4.5rem 0 5rem;
+            text-align: center;
+        }
+
+        .error-title {
+            margin-bottom: 0;
+            line-height: 1.35;
+        }
+
+        .glitch {
+            position: relative;
+            display: inline-block;
+            max-width: 100%;
+            text-shadow: 0 0 20px rgba(91, 155, 213, 0.28);
+        }
+
+        .glitch::before,
+        .glitch::after {
+            content: attr(data-text);
+            position: absolute;
+            inset: 0;
+            pointer-events: none;
+            opacity: 0;
+            text-shadow: none;
+            will-change: transform, clip-path, opacity;
+        }
+
+        .glitch::before {
+            color: #00d8ff;
+            animation: glitchSliceA 3.4s infinite steps(1, end);
+        }
+
+        .glitch::after {
+            color: #ff3b6b;
+            animation: glitchSliceB 2.9s infinite steps(1, end);
+        }
+
+        @keyframes glitchSliceA {
+            0%, 84%, 100% { opacity: 0; transform: none; clip-path: inset(0 0 100% 0); }
+            85% { opacity: .9; transform: translate(-4px, -1px); clip-path: inset(8% 0 58% 0); }
+            88% { opacity: .9; transform: translate(3px, 1px);   clip-path: inset(42% 0 22% 0); }
+            91% { opacity: .9; transform: translate(-2px, 2px);  clip-path: inset(66% 0 6% 0); }
+        }
+
+        @keyframes glitchSliceB {
+            0%, 78%, 100% { opacity: 0; transform: none; clip-path: inset(0 0 100% 0); }
+            79% { opacity: .9; transform: translate(4px, 1px);   clip-path: inset(18% 0 48% 0); }
+            82% { opacity: .9; transform: translate(-3px, -1px); clip-path: inset(54% 0 18% 0); }
+            85% { opacity: .9; transform: translate(2px, -2px);  clip-path: inset(2% 0 80% 0); }
+        }
+
+        .glitch.is-hot { animation: titleShake 0.16s steps(2) 3; }
+        .glitch.is-hot::before { opacity: .95; animation: hotA 0.28s steps(1, end) infinite; }
+        .glitch.is-hot::after  { opacity: .95; animation: hotB 0.24s steps(1, end) infinite; }
+
+        @keyframes hotA {
+            0%   { transform: translate(-6px, 0);    clip-path: inset(0 0 70% 0); }
+            20%  { transform: translate(4px, -2px);  clip-path: inset(30% 0 40% 0); }
+            40%  { transform: translate(-3px, 2px);  clip-path: inset(60% 0 10% 0); }
+            60%  { transform: translate(6px, 0);     clip-path: inset(10% 0 75% 0); }
+            80%  { transform: translate(-2px, -1px); clip-path: inset(75% 0 5% 0); }
+            100% { transform: translate(0);          clip-path: inset(0 0 100% 0); }
+        }
+
+        @keyframes hotB {
+            0%   { transform: translate(5px, 1px);   clip-path: inset(15% 0 60% 0); }
+            25%  { transform: translate(-5px, -1px); clip-path: inset(50% 0 25% 0); }
+            50%  { transform: translate(3px, 2px);   clip-path: inset(5% 0 80% 0); }
+            75%  { transform: translate(-4px, 0);    clip-path: inset(70% 0 12% 0); }
+            100% { transform: translate(0);          clip-path: inset(0 0 100% 0); }
+        }
+
+        @keyframes titleShake {
+            0%   { transform: translate(0); }
+            50%  { transform: translate(-2px, 1px); }
+            100% { transform: translate(0); }
+        }
+
+        .error-meta {
+            display: inline-flex;
+            align-items: center;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 0.55em;
+            max-width: 100%;
+            font-family: ui-monospace, SFMono-Regular, "SF Mono", Menlo, Consolas, "Liberation Mono", monospace;
+            font-size: 0.82rem;
+            letter-spacing: 0.06em;
+            color: rgba(44, 62, 80, 0.62);
+            padding: 0.5em 1.15em;
+            border-radius: 999px;
+            border: 1px solid rgba(91, 155, 213, 0.18);
+            background: rgba(255, 255, 255, 0.45);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            box-shadow: 0 4px 16px rgba(44, 62, 80, 0.05);
+        }
+
+        .status-dot {
+            flex: 0 0 auto;
+            width: 7px;
+            height: 7px;
+            border-radius: 50%;
+            background: #ff4d6d;
+            box-shadow: 0 0 8px rgba(255, 77, 109, 0.7);
+            animation: dotBlink 1.1s ease-in-out infinite;
+        }
+
+        @keyframes dotBlink {
+            0%, 100% { opacity: 1; }
+            50%      { opacity: 0.25; }
+        }
+
+        .meta-sep { opacity: 0.35; }
+
+        .caret {
+            display: inline-block;
+            width: 0.52em;
+            height: 1em;
+            background: currentColor;
+            opacity: 0.7;
+            vertical-align: -0.12em;
+            animation: caretBlink 1s steps(1, end) infinite;
+        }
+
+        @keyframes caretBlink {
+            0%, 50%   { opacity: 0.75; }
+            51%, 100% { opacity: 0; }
+        }
+
+        /* ---- 日志区 ---- */
+        .cmd-log {
+            width: 100%;
+            max-width: 780px;
+            margin: 0.2rem auto 0;
+            padding: 16px 18px;
+            font-family: ui-monospace, SFMono-Regular, "SF Mono", Menlo, Consolas, "Liberation Mono", monospace;
+            font-size: 12.5px;
+            line-height: 1.75;
+            color: #b9c4d4;
+            letter-spacing: 0.01em;
+            text-align: left;
+            overflow-x: auto;
+            background:
+                repeating-linear-gradient(0deg, rgba(255, 255, 255, 0.012) 0 1px, transparent 1px 3px),
+                #0b0d13;
+        }
+
+        .cmd-line {
+            white-space: pre-wrap;
+            word-break: break-word;
+        }
+
+        .cmd-time { color: #6f7a8c; }
+
+        .cmd-info {
+            color: #4af626;
+            font-weight: 700;
+            text-shadow: 0 0 8px rgba(74, 246, 38, 0.45);
+        }
+
+        .cmd-text { color: #b9c4d4; }
+
+        #fx {
+            position: fixed;
+            inset: 0;
+            z-index: 9999;
+            pointer-events: none;
+        }
+
+        #blocks {
+            position: fixed;
+            inset: 0;
+            z-index: 9998;
+            pointer-events: none;
+            overflow: hidden;
+        }
+
+        #blocks > i {
+            position: absolute;
+            display: block;
+            border-radius: 1px;
+            will-change: transform;
+            pointer-events: none;
+        }
+
+        .jitterable {
+            will-change: transform;
+            backface-visibility: hidden;
+        }
+
+        @media (prefers-color-scheme: dark) {
+            .glitch { text-shadow: 0 0 22px rgba(126, 200, 248, 0.22); }
+            .error-meta {
+                color: rgba(200, 210, 225, 0.6);
+                background: rgba(255, 255, 255, 0.05);
+                border-color: rgba(126, 200, 248, 0.16);
+                box-shadow: 0 4px 20px rgba(0, 0, 0, 0.25);
             }
+        }
+
+        @media (max-width: 560px) {
+            .error-title { font-size: 1.4rem; }
+            .error-meta { font-size: 0.72rem; letter-spacing: 0.04em; }
+            .cmd-log { font-size: 11px; padding: 14px; }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            .glitch::before, .glitch::after,
+            .glitch.is-hot, .glitch.is-hot::before, .glitch.is-hot::after,
+            .status-dot, .caret {
+                animation: none !important;
+            }
+            .glitch::before, .glitch::after { opacity: 0; }
+            .caret { opacity: 0.7; }
+            #fx, #blocks { display: none; }
         }
     </style>
 </head>
 <body>
 
-    <!-- 主页背景装饰光斑 -->
     <div class="pulse-dot" style="top:12%;left:8%;width:180px;height:180px;background:radial-gradient(circle,rgba(126,200,248,0.35) 0%,transparent 70%);animation-delay:0s;"></div>
     <div class="pulse-dot" style="top:55%;right:6%;width:220px;height:220px;background:radial-gradient(circle,rgba(240,160,144,0.28) 0%,transparent 70%);animation-delay:-3s;"></div>
     <div class="pulse-dot" style="top:75%;left:12%;width:160px;height:160px;background:radial-gradient(circle,rgba(126,200,248,0.3) 0%,transparent 70%);animation-delay:-5.5s;"></div>
     <div class="pulse-dot" style="top:20%;right:15%;width:140px;height:140px;background:radial-gradient(circle,rgba(180,210,240,0.25) 0%,transparent 70%);animation-delay:-2s;"></div>
     <div class="pulse-dot" style="top:88%;right:20%;width:200px;height:200px;background:radial-gradient(circle,rgba(200,180,220,0.22) 0%,transparent 70%);animation-delay:-6s;"></div>
 
-    <!-- 主页Header -->
     <header class="header">
         <div class="container">
-            <div class="logo">无名剧场网页服务系统</div>
+            <div class="logo jitterable">无名剧场网页服务系统</div>
         </div>
     </header>
 
-    <!-- 主页内容 -->
     <main class="container">
-        <section class="content-section">
-            <h1>无法连接到追光系列总服务器！</h1>
+        <section class="content-section error-panel">
+            <h1 class="error-title jitterable">
+                <span class="glitch" data-text="无法连接到追光系列总服务器！">无法连接到追光系列总服务器！</span>
+            </h1>
+
+            <p class="error-meta jitterable">
+                <span class="status-dot" aria-hidden="true"></span>
+                <span>ERR_CONNECTION_TIMED_OUT</span>
+                <span class="meta-sep">/</span>
+                <span>0x80072EE2</span>
+                <span class="meta-sep">/</span>
+                <span id="retryText">正在尝试重连</span><span class="caret" aria-hidden="true"></span>
+            </p>
+
+            <div class="cmd-log jitterable" role="log">
+                <div class="cmd-line"><span class="cmd-time">2026/10/25/04:44:19</span><span class="cmd-info">INFO:</span><span class="cmd-text">Authorized display logs.</span></div>
+                <div class="cmd-line"><span class="cmd-time">2026/10/25/04:46:54</span><span class="cmd-info">INFO:</span><span class="cmd-text">Received manual operation; CCS has been updated on the webpage.</span></div>
+                <div class="cmd-line"><span class="cmd-time">2026/10/25/04:48:42</span><span class="cmd-info">INFO:</span><span class="cmd-text">Receive manual operations and incrementally update the HTML with the real-time reconnection status.</span></div>
+            </div>
         </section>
     </main>
 
     <footer class="footer">
         <div class="container">
-            <p>无名剧场网页服务系统</p>
-            <p>© 2025-2026 追光系列. 保留所有权利.</p>
+            <p class="jitterable">无名剧场网页服务系统</p>
+            <p class="jitterable">© 2025-2026 追光系列. 保留所有权利.</p>
         </div>
     </footer>
 
+    <div id="blocks" aria-hidden="true"></div>
+    <canvas id="fx" aria-hidden="true"></canvas>
+
+    <script>
+    (function () {
+        'use strict';
+
+        const REDUCE = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+        const glitchEl  = document.querySelector('.glitch');
+        const retryText = document.getElementById('retryText');
+        const canvas    = document.getElementById('fx');
+        const ctx       = canvas.getContext('2d');
+        const blocksLayer = document.getElementById('blocks');
+
+        const darkMQ = window.matchMedia('(prefers-color-scheme: dark)');
+        let isDark = darkMQ.matches;
+        if (darkMQ.addEventListener) {
+            darkMQ.addEventListener('change', e => { isDark = e.matches; });
+        }
+
+        /* ---------- 画布 ---------- */
+        let W = 0, H = 0, dpr = 1;
+        function resize() {
+            dpr = Math.min(window.devicePixelRatio || 1, 2);
+            W = window.innerWidth;
+            H = window.innerHeight;
+            canvas.width  = Math.floor(W * dpr);
+            canvas.height = Math.floor(H * dpr);
+            canvas.style.width  = W + 'px';
+            canvas.style.height = H + 'px';
+            ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+        }
+        resize();
+        window.addEventListener('resize', resize, { passive: true });
+
+        /* ---------- 背景脉冲 ---------- */
+        let intensity = 0;
+        let holdTimer = 0;
+
+        function pulse(v, duration) {
+            if (REDUCE) return;
+            intensity = Math.max(intensity, v);
+            holdTimer = Math.max(holdTimer, duration || 0.3);
+        }
+
+        let hotTimer = null;
+        function triggerHot(ms) {
+            if (REDUCE || !glitchEl) return;
+            glitchEl.classList.add('is-hot');
+            clearTimeout(hotTimer);
+            hotTimer = setTimeout(() => glitchEl.classList.remove('is-hot'), ms || 380);
+        }
+
+        function stripeColor() {
+            const a = Math.random() * 0.12 + 0.04;
+            const r = Math.random();
+            if (isDark) {
+                if (r < 0.45) return 'rgba(255,255,255,' + a + ')';
+                if (r < 0.75) return 'rgba(0,216,255,' + (a * 1.2) + ')';
+                return 'rgba(255,59,107,' + (a * 1.3) + ')';
+            }
+            if (r < 0.40) return 'rgba(20,32,56,' + a + ')';
+            if (r < 0.70) return 'rgba(0,140,200,' + (a * 1.3) + ')';
+            return 'rgba(220,40,90,' + (a * 1.2) + ')';
+        }
+
+        function noiseColor() {
+            const a = Math.random() * 0.28 + 0.05;
+            return isDark
+                ? 'rgba(255,255,255,' + a + ')'
+                : 'rgba(15,25,45,' + (a * 0.75) + ')';
+        }
+
+        /* ---------- canvas 主循环 ---------- */
+        let lastTime = performance.now();
+
+        function frame(now) {
+            const dt = Math.min((now - lastTime) / 1000, 0.05);
+            lastTime = now;
+
+            holdTimer = Math.max(0, holdTimer - dt);
+            if (holdTimer <= 0) {
+                intensity *= Math.exp(-5.5 * dt);
+            }
+            if (intensity < 0.004) intensity = 0;
+
+            ctx.clearRect(0, 0, W, H);
+
+            if (intensity > 0.02) {
+                const stripes = Math.floor(intensity * 9) + 1;
+                for (let i = 0; i < stripes; i++) {
+                    const y = Math.random() * H;
+                    const h = Math.random() * 34 * intensity + 2;
+                    ctx.fillStyle = stripeColor();
+                    ctx.fillRect(0, y, W, h);
+                }
+
+                const dots = Math.floor(intensity * 140);
+                for (let i = 0; i < dots; i++) {
+                    ctx.fillStyle = noiseColor();
+                    const s = Math.random() < 0.7 ? 1.5 : 2.5;
+                    ctx.fillRect(Math.random() * W, Math.random() * H, s, s);
+                }
+
+                if (Math.random() < intensity * 0.12) {
+                    const y = Math.random() * H;
+                    ctx.fillStyle = isDark ? 'rgba(0,216,255,0.28)' : 'rgba(0,140,200,0.22)';
+                    ctx.fillRect(0, y, W, 1.5);
+                }
+            }
+
+            requestAnimationFrame(frame);
+        }
+
+        /* ============================================================
+           DOM 横向错位 + 撕裂色块
+           ============================================================ */
+
+        const jitterTargets = Array.prototype.slice.call(
+            document.querySelectorAll('.jitterable')
+        );
+
+        const SHALLOW_COLORS_DARK = [
+            'rgba(0,216,255,.65)',
+            'rgba(255,59,107,.6)',
+            'rgba(255,255,255,.45)',
+            'rgba(160,120,255,.55)',
+            'rgba(0,255,180,.5)'
+        ];
+        const SHALLOW_COLORS_LIGHT = [
+            'rgba(0,140,200,.6)',
+            'rgba(220,40,90,.5)',
+            'rgba(20,32,56,.55)',
+            'rgba(126,200,248,.65)',
+            'rgba(140,60,200,.45)'
+        ];
+
+        function randColor() {
+            const arr = isDark ? SHALLOW_COLORS_DARK : SHALLOW_COLORS_LIGHT;
+            return arr[(Math.random() * arr.length) | 0];
+        }
+
+        function jitterElement(el) {
+            if (!el) return;
+
+            const isBig = el.classList.contains('cmd-log');
+            const dir = Math.random() < 0.5 ? -1 : 1;
+            const dist = (isBig ? 3 : 6) + Math.random() * (isBig ? 16 : 34);
+            const dx = dir * dist;
+            const dur = 55 + Math.random() * 110;
+
+            el.style.transform = 'translateX(' + dx + 'px)';
+
+            if (Math.random() < 0.4) {
+                el.style.textShadow =
+                    (Math.random() < 0.5 ? -2 : 2) + 'px 0 rgba(0,216,255,.55), ' +
+                    (Math.random() < 0.5 ? 2 : -2) + 'px 0 rgba(255,59,107,.5)';
+            }
+
+            clearTimeout(el._jt);
+            el._jt = setTimeout(() => {
+                el.style.transform = '';
+                el.style.textShadow = '';
+            }, dur);
+        }
+
+        function spawnBlock(nearEl) {
+            const d = document.createElement('i');
+
+            const w = 70 + Math.random() * 380;
+            const h = 5 + Math.random() * 28;
+
+            let x, y;
+            if (nearEl && Math.random() < 0.55) {
+                const r = nearEl.getBoundingClientRect();
+                x = r.left + (Math.random() - 0.5) * (r.width + 80);
+                y = r.top + Math.random() * r.height;
+            } else {
+                x = Math.random() * W;
+                y = Math.random() * H;
+            }
+
+            x = Math.max(-w * 0.3, Math.min(W - w * 0.7, x));
+            y = Math.max(-h, Math.min(H - h, y));
+
+            const bdx = (Math.random() < 0.5 ? -1 : 1) * (10 + Math.random() * 45);
+
+            d.style.cssText =
+                'left:' + x + 'px;' +
+                'top:'  + y + 'px;' +
+                'width:'  + w + 'px;' +
+                'height:' + h + 'px;' +
+                'background:' + randColor() + ';' +
+                'transform:translateX(' + bdx + 'px);';
+
+            blocksLayer.appendChild(d);
+            setTimeout(() => d.remove(), 50 + Math.random() * 130);
+        }
+
+        function scheduleJitter() {
+            const delay = 120 + Math.random() * 300;
+
+            setTimeout(() => {
+                const n = 1 + (Math.random() < 0.35 ? 1 : 0);
+                let lastEl = null;
+                for (let i = 0; i < n; i++) {
+                    const el = jitterTargets[(Math.random() * jitterTargets.length) | 0];
+                    jitterElement(el);
+                    lastEl = el;
+                }
+
+                if (Math.random() < 0.75) {
+                    const bn = 1 + (Math.random() < 0.3 ? 1 : 0);
+                    for (let i = 0; i < bn; i++) {
+                        spawnBlock(Math.random() < 0.5 ? lastEl : null);
+                    }
+                }
+
+                if (Math.random() < 0.18) {
+                    pulse(0.35 + Math.random() * 0.35, 0.08 + Math.random() * 0.18);
+                }
+
+                if (Math.random() < 0.08) {
+                    triggerHot(180 + Math.random() * 220);
+                }
+
+                scheduleJitter();
+            }, delay);
+        }
+
+        function scheduleRandom() {
+            const delay = 1500 + Math.random() * 3500;
+            setTimeout(() => {
+                pulse(0.35 + Math.random() * 0.45, 0.1 + Math.random() * 0.25);
+                if (Math.random() < 0.4) triggerHot(200 + Math.random() * 180);
+                scheduleRandom();
+            }, delay);
+        }
+
+        /* ---------- 状态文案 ---------- */
+        function startStatusLoop() {
+            if (!retryText) return;
+            const phrases = ['正在尝试重连', '等待响应', '重试中', '握手失败'];
+            let i = 0;
+            setInterval(() => {
+                i = (i + 1) % phrases.length;
+                retryText.textContent = phrases[i];
+            }, 2400);
+        }
+
+        /* ---------- 启动 ---------- */
+        if (!REDUCE) {
+            requestAnimationFrame(frame);
+            scheduleRandom();
+            scheduleJitter();
+            startStatusLoop();
+
+            setTimeout(() => {
+                pulse(1, 0.45);
+                triggerHot(520);
+                for (let i = 0; i < 3; i++) {
+                    setTimeout(() => {
+                        jitterElement(jitterTargets[i % jitterTargets.length]);
+                        spawnBlock(null);
+                    }, i * 60);
+                }
+            }, 700);
+        } else if (retryText) {
+            retryText.textContent = '连接已断开';
+        }
+    })();
+    </script>
 </body>
 </html>

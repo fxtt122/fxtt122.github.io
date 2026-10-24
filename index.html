@@ -361,7 +361,6 @@
             51%, 100% { opacity: 0; }
         }
 
-        /* ---- 日志区 ---- */
         .cmd-log {
             width: 100%;
             max-width: 780px;
@@ -418,8 +417,30 @@
         }
 
         .jitterable {
-            will-change: transform;
+            will-change: transform, clip-path;
             backface-visibility: hidden;
+        }
+
+        /* 横向切片克隆 */
+        .slice-clone {
+            position: fixed !important;
+            margin: 0 !important;
+            pointer-events: none !important;
+            z-index: 9997;
+            will-change: transform, clip-path;
+        }
+
+        /* 克隆里禁用 glitch 伪元素，避免和原元素不同步 */
+        .slice-clone .glitch::before,
+        .slice-clone .glitch::after {
+            display: none !important;
+        }
+
+        /* 克隆里的循环动画一律静止，避免闪烁不同步 */
+        .slice-clone .status-dot,
+        .slice-clone .caret {
+            animation: none !important;
+            opacity: 1;
         }
 
         @media (prefers-color-scheme: dark) {
@@ -610,7 +631,7 @@
         }
 
         /* ============================================================
-           DOM 横向错位 + 撕裂色块
+           ★ 横带切片错位（DOM 层）
            ============================================================ */
 
         const jitterTargets = Array.prototype.slice.call(
@@ -637,54 +658,17 @@
             return arr[(Math.random() * arr.length) | 0];
         }
 
-        function jitterElement(el) {
-            if (!el) return;
-
-            const isBig = el.classList.contains('cmd-log');
-            const dir = Math.random() < 0.5 ? -1 : 1;
-            const dist = (isBig ? 3 : 6) + Math.random() * (isBig ? 16 : 34);
-            const dx = dir * dist;
-            const dur = 55 + Math.random() * 110;
-
-            el.style.transform = 'translateX(' + dx + 'px)';
-
-            if (Math.random() < 0.4) {
-                el.style.textShadow =
-                    (Math.random() < 0.5 ? -2 : 2) + 'px 0 rgba(0,216,255,.55), ' +
-                    (Math.random() < 0.5 ? 2 : -2) + 'px 0 rgba(255,59,107,.5)';
-            }
-
-            clearTimeout(el._jt);
-            el._jt = setTimeout(() => {
-                el.style.transform = '';
-                el.style.textShadow = '';
-            }, dur);
-        }
-
-        function spawnBlock(nearEl) {
+        /* 在指定 y 附近撒一块彩色撕裂带 */
+        function spawnBlockAt(y, baseDx) {
             const d = document.createElement('i');
-
-            const w = 70 + Math.random() * 380;
-            const h = 5 + Math.random() * 28;
-
-            let x, y;
-            if (nearEl && Math.random() < 0.55) {
-                const r = nearEl.getBoundingClientRect();
-                x = r.left + (Math.random() - 0.5) * (r.width + 80);
-                y = r.top + Math.random() * r.height;
-            } else {
-                x = Math.random() * W;
-                y = Math.random() * H;
-            }
-
-            x = Math.max(-w * 0.3, Math.min(W - w * 0.7, x));
-            y = Math.max(-h, Math.min(H - h, y));
-
-            const bdx = (Math.random() < 0.5 ? -1 : 1) * (10 + Math.random() * 45);
+            const w = 50 + Math.random() * 340;
+            const h = 3 + Math.random() * 18;
+            const x = Math.random() * Math.max(1, W - w);
+            const bdx = baseDx * (0.4 + Math.random() * 0.9);
 
             d.style.cssText =
                 'left:' + x + 'px;' +
-                'top:'  + y + 'px;' +
+                'top:'  + (y - h / 2) + 'px;' +
                 'width:'  + w + 'px;' +
                 'height:' + h + 'px;' +
                 'background:' + randColor() + ';' +
@@ -694,72 +678,139 @@
             setTimeout(() => d.remove(), 50 + Math.random() * 130);
         }
 
-        function scheduleJitter() {
-            const delay = 120 + Math.random() * 300;
+        /* 核心：整页随机横带错位 */
+        function sliceGlitch() {
+            if (REDUCE) return;
 
-            setTimeout(() => {
-                const n = 1 + (Math.random() < 0.35 ? 1 : 0);
-                let lastEl = null;
-                for (let i = 0; i < n; i++) {
-                    const el = jitterTargets[(Math.random() * jitterTargets.length) | 0];
-                    jitterElement(el);
-                    lastEl = el;
+            const viewH = window.innerHeight;
+
+            // 随机横带
+            const top = Math.random() * viewH;
+            const sliceH = 8 + Math.random() * 68;           // 8 ~ 76px
+            const bottom = Math.min(top + sliceH, viewH);
+
+            // 随机方向 + 随机位移量
+            const dir = Math.random() < 0.5 ? -1 : 1;
+            const dx = dir * (10 + Math.random() * 55);      // 10 ~ 65px
+
+            const dur = 70 + Math.random() * 130;            // 70 ~ 200ms
+
+            const clones = [];
+
+            for (let k = 0; k < jitterTargets.length; k++) {
+                const el = jitterTargets[k];
+                const r = el.getBoundingClientRect();
+                if (r.height < 1) continue;
+
+                // 横带与元素在竖直方向上的交集
+                const iTop = Math.max(top, r.top);
+                const iBottom = Math.min(bottom, r.bottom);
+                if (iBottom - iTop < 1) continue;
+
+                const relTop = iTop - r.top;
+                const relBottom = iBottom - r.top;
+
+                // 1) 原元素：用 polygon 沿横带挖一个贯穿的洞
+                const tPct = (relTop / r.height) * 100;
+                const bPct = (relBottom / r.height) * 100;
+                el.style.clipPath =
+                    'polygon(0 0, 100% 0, 100% ' + tPct + '%, 0 ' + tPct + '%, ' +
+                    '0 ' + bPct + '%, 100% ' + bPct + '%, 100% 100%, 0 100%)';
+
+                // 2) 克隆：只显示横带内的部分，并横向平移
+                const c = el.cloneNode(true);
+                c.removeAttribute('id');
+                // 去掉所有内部 id 避免重复
+                const innerIds = c.querySelectorAll('[id]');
+                for (let j = 0; j < innerIds.length; j++) innerIds[j].removeAttribute('id');
+                // 去掉高亮态，避免克隆里突然抖动
+                c.classList.remove('jitterable', 'is-hot');
+                c.classList.add('slice-clone');
+
+                c.style.left   = r.left + 'px';
+                c.style.top    = r.top  + 'px';
+                c.style.width  = r.width  + 'px';
+                c.style.height = r.height + 'px';
+                c.style.transform = 'translateX(' + dx + 'px)';
+                c.style.clipPath  =
+                    'inset(' + relTop + 'px 0 ' + (r.height - relBottom) + 'px 0)';
+
+                document.body.appendChild(c);
+                clones.push({ c: c, el: el });
+            }
+
+            // 3) 撕裂缝处的彩色碎片
+            if (Math.random() < 0.85) {
+                const bn = 1 + (Math.random() < 0.45 ? 1 : 0);
+                for (let i = 0; i < bn; i++) {
+                    const y = top + Math.random() * Math.max(1, bottom - top);
+                    spawnBlockAt(y, dx);
                 }
+            }
 
-                if (Math.random() < 0.75) {
-                    const bn = 1 + (Math.random() < 0.3 ? 1 : 0);
-                    for (let i = 0; i < bn; i++) {
-                        spawnBlock(Math.random() < 0.5 ? lastEl : null);
-                    }
+            // 4) 伴随背景脉冲
+            if (Math.random() < 0.25) {
+                pulse(0.28 + Math.random() * 0.3, 0.08 + Math.random() * 0.12);
+            }
+            if (Math.random() < 0.06) {
+                triggerHot(180 + Math.random() * 180);
+            }
+
+            // 5) 到点复原
+            setTimeout(function () {
+                for (let i = 0; i < clones.length; i++) {
+                    clones[i].c.remove();
+                    clones[i].el.style.clipPath = '';
                 }
+            }, dur);
+        }
 
-                if (Math.random() < 0.18) {
-                    pulse(0.35 + Math.random() * 0.35, 0.08 + Math.random() * 0.18);
+        /* 高频调度 */
+        function scheduleGlitch() {
+            const delay = 100 + Math.random() * 280;   // 100 ~ 380ms
+            setTimeout(function () {
+                sliceGlitch();
+                // 偶尔双发，制造重叠撕裂
+                if (Math.random() < 0.25) {
+                    setTimeout(sliceGlitch, 40 + Math.random() * 90);
                 }
-
-                if (Math.random() < 0.08) {
-                    triggerHot(180 + Math.random() * 220);
-                }
-
-                scheduleJitter();
+                scheduleGlitch();
             }, delay);
         }
 
+        /* 低频背景脉冲 */
         function scheduleRandom() {
             const delay = 1500 + Math.random() * 3500;
-            setTimeout(() => {
-                pulse(0.35 + Math.random() * 0.45, 0.1 + Math.random() * 0.25);
+            setTimeout(function () {
+                pulse(0.3 + Math.random() * 0.4, 0.1 + Math.random() * 0.2);
                 if (Math.random() < 0.4) triggerHot(200 + Math.random() * 180);
                 scheduleRandom();
             }, delay);
         }
 
-        /* ---------- 状态文案 ---------- */
+        /* 状态文案 */
         function startStatusLoop() {
             if (!retryText) return;
             const phrases = ['正在尝试重连', '等待响应', '重试中', '握手失败'];
             let i = 0;
-            setInterval(() => {
+            setInterval(function () {
                 i = (i + 1) % phrases.length;
                 retryText.textContent = phrases[i];
             }, 2400);
         }
 
-        /* ---------- 启动 ---------- */
+        /* 启动 */
         if (!REDUCE) {
             requestAnimationFrame(frame);
             scheduleRandom();
-            scheduleJitter();
+            scheduleGlitch();
             startStatusLoop();
 
-            setTimeout(() => {
+            setTimeout(function () {
                 pulse(1, 0.45);
                 triggerHot(520);
                 for (let i = 0; i < 3; i++) {
-                    setTimeout(() => {
-                        jitterElement(jitterTargets[i % jitterTargets.length]);
-                        spawnBlock(null);
-                    }, i * 60);
+                    setTimeout(sliceGlitch, i * 90);
                 }
             }, 700);
         } else if (retryText) {
